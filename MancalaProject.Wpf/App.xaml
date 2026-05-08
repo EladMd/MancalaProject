@@ -1,0 +1,11 @@
+<Application x:Class="MancalaProject.Wpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MancalaProject.Wpf">
+    <!-- Resources intentionally empty.
+         All style definitions live inside the windows that use them
+         (e.g. PitButtonStyle is defined in MainWindow.xaml). This keeps
+         each window self-contained and avoids the SDK-style WPF quirk
+         where Application.Resources can silently skip BAML compilation. -->
+    <Application.Resources/>
+</Application>

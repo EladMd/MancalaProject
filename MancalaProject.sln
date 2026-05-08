@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MancalaProject.Core", "Manc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MancalaProject.Console", "MancalaProject.Console\MancalaProject.Console.csproj", "{656A5819-1F26-44A4-9F5F-65D66800ACDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MancalaProject.Wpf", "MancalaProject.Wpf\MancalaProject.Wpf.csproj", "{68CC8579-E97A-4107-A7FC-5F80B4881024}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{656A5819-1F26-44A4-9F5F-65D66800ACDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{656A5819-1F26-44A4-9F5F-65D66800ACDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{656A5819-1F26-44A4-9F5F-65D66800ACDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68CC8579-E97A-4107-A7FC-5F80B4881024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CC8579-E97A-4107-A7FC-5F80B4881024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CC8579-E97A-4107-A7FC-5F80B4881024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CC8579-E97A-4107-A7FC-5F80B4881024}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
