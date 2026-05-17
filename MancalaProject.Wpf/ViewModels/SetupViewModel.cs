@@ -62,21 +62,21 @@ namespace MancalaProject.Wpf.ViewModels
         //  Defaults to Hard (matches the Console app's behavior).
         // ============================================================
 
-        /// <summary>The user has selected Easy difficulty (large noise, no opponent lookahead, no endgame rollout).</summary>
+        /// <summary>The user has selected Easy difficulty (2-ply lookahead — weakest play).</summary>
         public bool IsEasy
         {
             get => _isEasy;
             set => SetField(ref _isEasy, value);
         }
 
-        /// <summary>The user has selected Medium difficulty (small noise, opponent lookahead enabled, no endgame rollout).</summary>
+        /// <summary>The user has selected Medium difficulty (4-ply lookahead).</summary>
         public bool IsMedium
         {
             get => _isMedium;
             set => SetField(ref _isMedium, value);
         }
 
-        /// <summary>The user has selected Hard difficulty (no noise, full opponent lookahead, endgame rollout enabled). Default.</summary>
+        /// <summary>The user has selected Hard difficulty (6-ply lookahead — strongest play). Default.</summary>
         public bool IsHard
         {
             get => _isHard;

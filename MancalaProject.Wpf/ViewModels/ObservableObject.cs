@@ -11,7 +11,7 @@ namespace MancalaProject.Wpf.ViewModels
     /// so derived classes never have to repeat property names as strings.
     /// </summary>
     /// <remarks>
-    /// Two derived classes are anticipated: <c>GameViewModel</c> (the live game) and
+    /// Two classes derive from it: <c>GameViewModel</c> (the live game) and
     /// <c>SetupViewModel</c> (the start-up dialog for choosing mode and difficulty).
     /// Sharing this base keeps the INPC plumbing in one place and consistent.
     /// </remarks>

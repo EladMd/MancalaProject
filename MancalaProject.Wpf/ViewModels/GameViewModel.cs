@@ -69,8 +69,8 @@ namespace MancalaProject.Wpf.ViewModels
 
         /// <summary>
         /// Creates a new game ViewModel. Defaults to Player-vs-Player so that the View
-        /// can be tested in isolation; the future setup screen will pass the user's
-        /// real choice for <paramref name="vsComputer"/> and <paramref name="difficulty"/>.
+        /// can be tested in isolation; in normal startup the setup screen passes the
+        /// user's real choice for <paramref name="vsComputer"/> and <paramref name="difficulty"/>.
         /// </summary>
         /// <param name="vsComputer">If <c>true</c>, Player 2 is controlled by a <see cref="GreedyAgent"/>.</param>
         /// <param name="difficulty">Strength of the computer agent. Ignored when <paramref name="vsComputer"/> is <c>false</c>.</param>
