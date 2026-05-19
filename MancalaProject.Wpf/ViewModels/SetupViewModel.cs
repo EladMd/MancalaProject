@@ -1,8 +1,8 @@
 namespace MancalaProject.Wpf.ViewModels
 {
     /// <summary>
-    /// ViewModel backing the startup dialog. Lets the user pick a game mode
-    /// (PvP / PvE) and, when applicable, a difficulty for the computer agent.
+    /// ViewModel backing the startup dialog. Lets the user pick a difficulty
+    /// for the computer agent and choose which side takes the first move.
     /// </summary>
     /// <remarks>
     /// Each radio button in the View is bound two-way to a <c>bool</c> property here.
@@ -11,55 +11,28 @@ namespace MancalaProject.Wpf.ViewModels
     /// </remarks>
     public class SetupViewModel : ObservableObject
     {
-        private bool _isVsComputer = true;
         private bool _isEasy;
         private bool _isMedium;
-        private bool _isHard = true;
-
-        // ============================================================
-        //  Mode (PvP / PvE) — exposed as two mutually-exclusive bools
-        //  so each RadioButton can bind to its own IsChecked source.
-        // ============================================================
-
-        /// <summary>The user has chosen Player vs Computer.</summary>
-        public bool IsVsComputer
-        {
-            get => _isVsComputer;
-            set
-            {
-                if (!SetField(ref _isVsComputer, value)) return;
-                OnPropertyChanged(nameof(IsVsPlayer));
-                OnPropertyChanged(nameof(IsDifficultyEnabled));
-            }
-        }
+        private bool _isHard;
+        private bool _playerStarts;
 
         /// <summary>
-        /// The user has chosen Player vs Player. Implemented as the inverse of
-        /// <see cref="IsVsComputer"/> — flipping one always flips the other.
+        /// Creates the setup ViewModel, pre-selecting the given difficulty and
+        /// starting-player choice. With no arguments it defaults to Hard, with
+        /// the human player moving first.
         /// </summary>
-        public bool IsVsPlayer
+        /// <param name="difficulty">Difficulty to pre-select.</param>
+        /// <param name="computerStarts">If <c>true</c>, "computer plays first" is pre-selected.</param>
+        public SetupViewModel(Difficulty difficulty = Difficulty.Hard, bool computerStarts = false)
         {
-            get => !_isVsComputer;
-            set
-            {
-                // RadioButton fires this setter both when checked (true) and when
-                // unchecked (false). We only need to act on the "becoming true"
-                // edge; the "becoming false" path is handled implicitly by
-                // IsVsComputer becoming true.
-                if (value) IsVsComputer = false;
-            }
+            _isEasy   = difficulty == Difficulty.Easy;
+            _isMedium = difficulty == Difficulty.Medium;
+            _isHard   = difficulty == Difficulty.Hard;
+            _playerStarts = !computerStarts;
         }
-
-        /// <summary>
-        /// Whether the difficulty group should be active. Greys out the difficulty
-        /// radios in PvP mode without removing them, so the user always sees what
-        /// would be available.
-        /// </summary>
-        public bool IsDifficultyEnabled => _isVsComputer;
 
         // ============================================================
         //  Difficulty — three mutually-exclusive bools.
-        //  Defaults to Hard (matches the Console app's behavior).
         // ============================================================
 
         /// <summary>The user has selected Easy difficulty (2-ply lookahead — weakest play).</summary>
@@ -69,14 +42,14 @@ namespace MancalaProject.Wpf.ViewModels
             set => SetField(ref _isEasy, value);
         }
 
-        /// <summary>The user has selected Medium difficulty (4-ply lookahead).</summary>
+        /// <summary>The user has selected Medium difficulty (3-ply lookahead).</summary>
         public bool IsMedium
         {
             get => _isMedium;
             set => SetField(ref _isMedium, value);
         }
 
-        /// <summary>The user has selected Hard difficulty (6-ply lookahead — strongest play). Default.</summary>
+        /// <summary>The user has selected Hard difficulty (4-ply search plus a capture-safety guard — strongest play).</summary>
         public bool IsHard
         {
             get => _isHard;
@@ -84,7 +57,39 @@ namespace MancalaProject.Wpf.ViewModels
         }
 
         // ============================================================
-        //  Output — read by App.xaml.cs after the dialog closes
+        //  Who moves first — two mutually-exclusive bools, exposed as the
+        //  inverse of one another so each RadioButton binds to its own source.
+        // ============================================================
+
+        /// <summary>The human player takes the first move. The default.</summary>
+        public bool PlayerStarts
+        {
+            get => _playerStarts;
+            set
+            {
+                if (SetField(ref _playerStarts, value))
+                    OnPropertyChanged(nameof(ComputerStarts));
+            }
+        }
+
+        /// <summary>
+        /// The computer agent takes the first move. Implemented as the inverse of
+        /// <see cref="PlayerStarts"/> — flipping one always flips the other.
+        /// </summary>
+        public bool ComputerStarts
+        {
+            get => !_playerStarts;
+            set
+            {
+                // A RadioButton fires this setter both when checked (true) and
+                // when unchecked (false). Only the "becoming true" edge needs
+                // handling; the other path follows from PlayerStarts becoming true.
+                if (value) PlayerStarts = false;
+            }
+        }
+
+        // ============================================================
+        //  Output — read by the View after the dialog closes
         // ============================================================
 
         /// <summary>

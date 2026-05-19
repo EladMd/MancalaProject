@@ -25,38 +25,14 @@
                    Foreground="#3E2A1F"
                    Margin="0,0,0,24"/>
 
-        <!-- Mode -->
-        <GroupBox Grid.Row="1"
-                  Header="Game Mode"
-                  Foreground="#3E2A1F"
-                  FontSize="15"
-                  FontWeight="SemiBold"
-                  Padding="8"
-                  Margin="0,0,0,18">
-            <StackPanel Margin="6,8">
-                <RadioButton Content="Player vs Computer"
-                             GroupName="Mode"
-                             IsChecked="{Binding IsVsComputer}"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Margin="0,6"/>
-                <RadioButton Content="Player vs Player"
-                             GroupName="Mode"
-                             IsChecked="{Binding IsVsPlayer}"
-                             FontSize="16"
-                             FontWeight="Normal"
-                             Margin="0,6"/>
-            </StackPanel>
-        </GroupBox>
-
         <!-- Difficulty -->
-        <GroupBox Grid.Row="2"
+        <GroupBox Grid.Row="1"
                   Header="Difficulty"
                   Foreground="#3E2A1F"
                   FontSize="15"
                   FontWeight="SemiBold"
                   Padding="8"
-                  IsEnabled="{Binding IsDifficultyEnabled}">
+                  Margin="0,0,0,18">
             <StackPanel Margin="6,8">
                 <RadioButton Content="Easy"
                              GroupName="Difficulty"
@@ -73,6 +49,29 @@
                 <RadioButton Content="Hard"
                              GroupName="Difficulty"
                              IsChecked="{Binding IsHard}"
+                             FontSize="16"
+                             FontWeight="Normal"
+                             Margin="0,5"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Who plays first -->
+        <GroupBox Grid.Row="2"
+                  Header="Who plays first"
+                  Foreground="#3E2A1F"
+                  FontSize="15"
+                  FontWeight="SemiBold"
+                  Padding="8">
+            <StackPanel Margin="6,8">
+                <RadioButton Content="I play first"
+                             GroupName="Starter"
+                             IsChecked="{Binding PlayerStarts}"
+                             FontSize="16"
+                             FontWeight="Normal"
+                             Margin="0,5"/>
+                <RadioButton Content="Computer plays first"
+                             GroupName="Starter"
+                             IsChecked="{Binding ComputerStarts}"
                              FontSize="16"
                              FontWeight="Normal"
                              Margin="0,5"/>

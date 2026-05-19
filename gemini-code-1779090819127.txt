@@ -1,0 +1,33 @@
+מערכת — משחק מנקלה (Kalah)
+│
+├── MancalaProject.Core — שכבת המודול (ספריית מחלקות, .NET 8.0)
+│   │
+│   ├── מנוע המשחק ── GameEngine ......... לוח, חוקים, ולידציה, זריעה, חטיפה, סיום משחק
+│   │
+│   ├── הסוכן הממוחשב
+│   │   ├── GreedyAgent ........ ה-API פאסאד הציבורי של הסוכן
+│   │   ├── BeamSearch ........ מנוע החיפוש Best-First Beam + מעבר ה-backup
+│   │   ├── Heuristic ......... פונקציית ההערכה המותאמת-שלב
+│   │   ├── PhaseAutomaton .... ה-FSA — מסווג את שלב המשחק
+│   │   └── GamePhase ......... חמשת שלבי המשחק (enum)
+│   │
+│   └── מבני נתונים תומכים
+│       ├── MinHeap ........... תור עדיפויות עצמי (הפרונטיר)
+│       ├── SearchNode ........ צומת בעץ החיפוש
+│       ├── MoveResult ........ תוצאת מהלך (record)
+│       └── Player / Difficulty (enums)
+│
+├── MancalaProject.Wpf — שכבת התצוגה (אפליקציית WPF, .NET 8.0-windows)
+│   │
+│   ├── ViewModels (לוגיקת תצוגה)
+│   │   ├── GameViewModel ..... מתווך בין מנוע המשחק לחלון המשחק
+│   │   ├── SetupViewModel .... לוגיקת מסך בחירת הקושי
+│   │   ├── ObservableObject .. בסיס INotifyPropertyChanged
+│   │   └── RelayCommand ...... מימוש ICommand גנרי
+│   │
+│   └── Views (תצוגה)
+│       ├── MainWindow ........ חלון המשחק
+│       └── SetupWindow ....... מסך בחירת רמת קושי
+│
+└── MancalaProject.Console — שכבת תצוגה חלופית (אפליקציית קונסול)
+    └── Program .............. ממשק טקסטואלי, משמש לבדיקות רגרסיה

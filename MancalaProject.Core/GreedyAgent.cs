@@ -3,19 +3,19 @@ using System;
 namespace MancalaProject
 {
     /// <summary>
-    /// Specifies how strong the computer agent should play. Difficulty sets the
-    /// search's lookahead horizon — how many plies ahead it looks — and, scaling
-    /// with it, the node-expansion budget and the beam width. A weaker setting
-    /// looks fewer moves ahead. The agent is fully deterministic at every
-    /// difficulty: no randomness is ever injected into the evaluation or the search.
+    /// Specifies how strong the computer agent should play. The three levels
+    /// search progressively deeper (Easy 2, Medium 3, Hard 4 plies); Hard
+    /// additionally screens its chosen move through a capture-safety guard.
+    /// The agent is fully deterministic at every difficulty: no randomness is
+    /// ever injected into the evaluation or the search.
     /// </summary>
     public enum Difficulty
     {
         /// <summary>Looks 2 plies ahead (my move + the opponent's reply), with the smallest node budget and a narrow beam. Weakest play.</summary>
         Easy,
-        /// <summary>Looks 4 plies ahead, with a moderate node budget and the full beam.</summary>
+        /// <summary>Looks 3 plies ahead, with a moderate node budget and the full beam.</summary>
         Medium,
-        /// <summary>Looks 6 plies ahead, with the largest node budget and the full beam. Strongest play.</summary>
+        /// <summary>Searches 4 plies ahead — one ply deeper than Medium — and additionally screens its chosen move through a capture-safety guard. Strongest play.</summary>
         Hard
     }
 

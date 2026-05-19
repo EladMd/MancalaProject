@@ -81,13 +81,14 @@ namespace MancalaProject
 
         /// <summary>
         /// Initializes a new game with the standard starting position
-        /// (every pit holds <see cref="InitialStones"/>) and Player 1 to move.
+        /// (every pit holds <see cref="InitialStones"/>).
         /// </summary>
-        public GameEngine()
+        /// <param name="startingPlayer">The player to take the first move. Defaults to <see cref="Player.Player1"/>.</param>
+        public GameEngine(Player startingPlayer = Player.Player1)
         {
             _board = new int[BoardSize];
             InitializeBoard();
-            CurrentPlayer = Player.Player1;
+            CurrentPlayer = startingPlayer;
         }
 
         private GameEngine(GameEngine source)

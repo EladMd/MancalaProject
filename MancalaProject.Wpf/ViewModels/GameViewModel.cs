@@ -41,16 +41,16 @@ namespace MancalaProject.Wpf.ViewModels
         private const int MoveResultDisplayMs = 1100;
 
         // ============================================================
-        //  Configuration (immutable for the lifetime of this ViewModel)
+        //  Configuration — set at construction, updated by Reconfigure.
         // ============================================================
-        private readonly bool _vsComputer;
-        private readonly Difficulty _difficulty;
+        private Difficulty _difficulty;
+        private bool _computerStarts;
 
         // ============================================================
         //  Mutable state
         // ============================================================
         private GameEngine _engine = null!;   // initialized by StartNewGame in the constructor
-        private GreedyAgent? _agent;
+        private GreedyAgent _agent = null!;    // initialized by StartNewGame in the constructor
         private string _statusMessage = "";
         private bool _isComputerThinking;
 
@@ -68,16 +68,16 @@ namespace MancalaProject.Wpf.ViewModels
         // ============================================================
 
         /// <summary>
-        /// Creates a new game ViewModel. Defaults to Player-vs-Player so that the View
-        /// can be tested in isolation; in normal startup the setup screen passes the
-        /// user's real choice for <paramref name="vsComputer"/> and <paramref name="difficulty"/>.
+        /// Creates a new game ViewModel. Player 1 is the human, Player 2 is the
+        /// computer. In normal startup the setup screen passes the user's chosen
+        /// <paramref name="difficulty"/> and <paramref name="computerStarts"/>.
         /// </summary>
-        /// <param name="vsComputer">If <c>true</c>, Player 2 is controlled by a <see cref="GreedyAgent"/>.</param>
-        /// <param name="difficulty">Strength of the computer agent. Ignored when <paramref name="vsComputer"/> is <c>false</c>.</param>
-        public GameViewModel(bool vsComputer = false, Difficulty difficulty = Difficulty.Hard)
+        /// <param name="difficulty">Strength of the computer agent.</param>
+        /// <param name="computerStarts">If <c>true</c>, the computer takes the opening move.</param>
+        public GameViewModel(Difficulty difficulty = Difficulty.Hard, bool computerStarts = false)
         {
-            _vsComputer = vsComputer;
             _difficulty = difficulty;
+            _computerStarts = computerStarts;
 
             PlayPitCommand = new RelayCommand<int>(OnPlayPit, CanPlayPit);
             NewGameCommand = new RelayCommand(StartNewGame);
@@ -95,7 +95,7 @@ namespace MancalaProject.Wpf.ViewModels
         /// </summary>
         public RelayCommand<int> PlayPitCommand { get; }
 
-        /// <summary>Resets the engine and starts a fresh game using the same mode and difficulty.</summary>
+        /// <summary>Resets the engine and starts a fresh game with the same difficulty and starting player.</summary>
         public RelayCommand NewGameCommand { get; }
 
         /// <summary>
@@ -104,6 +104,25 @@ namespace MancalaProject.Wpf.ViewModels
         /// modal dialog without the ViewModel knowing what a MessageBox is.
         /// </summary>
         public event Action<string>? GameOver;
+
+        /// <summary>The difficulty the current game is being played at.</summary>
+        public Difficulty CurrentDifficulty => _difficulty;
+
+        /// <summary>Whether the computer takes the opening move in the current game.</summary>
+        public bool ComputerStarts => _computerStarts;
+
+        /// <summary>
+        /// Switches the game to a new <paramref name="difficulty"/> and starting
+        /// player, then begins a fresh game. Invoked by the in-game "Setup" button.
+        /// </summary>
+        /// <param name="difficulty">The difficulty to switch to.</param>
+        /// <param name="computerStarts">If <c>true</c>, the computer takes the opening move.</param>
+        public void Reconfigure(Difficulty difficulty, bool computerStarts)
+        {
+            _difficulty = difficulty;
+            _computerStarts = computerStarts;
+            StartNewGame();
+        }
 
         // ============================================================
         //  Board state — exposed as 14 individual properties so every
@@ -184,13 +203,13 @@ namespace MancalaProject.Wpf.ViewModels
         public bool IsPlayer2Turn => !IsGameOver && _engine.CurrentPlayer == Player.Player2;
 
         /// <summary>
-        /// <c>true</c> iff a human is allowed to click a pit right now — i.e. game is live,
-        /// computer is not thinking, and the current player is not the computer.
+        /// <c>true</c> iff the human is allowed to click a pit right now — i.e. game is live,
+        /// the computer is not thinking, and it is Player 1's (the human's) turn.
         /// </summary>
         public bool IsHumanTurn =>
             !IsGameOver
             && !IsComputerThinking
-            && !(_vsComputer && _engine.CurrentPlayer == Player.Player2);
+            && _engine.CurrentPlayer != Player.Player2;
 
         // ============================================================
         //  Game flow
@@ -210,16 +229,16 @@ namespace MancalaProject.Wpf.ViewModels
             if (_engine != null)
                 _engine.BoardChanged -= OnEngineBoardChanged;
 
-            _engine = new GameEngine();
+            _engine = new GameEngine(_computerStarts ? Player.Player2 : Player.Player1);
             _engine.BoardChanged += OnEngineBoardChanged;
-            _agent = _vsComputer ? new GreedyAgent(Player.Player2, _difficulty) : null;
+            _agent = new GreedyAgent(Player.Player2, _difficulty);
 
             IsComputerThinking = false;
-            StatusMessage = "Player 1's turn";
+            StatusMessage = NextTurnText();
             RaiseAllBoardProperties();
 
-            // Forward-compat: if a future configuration gives the agent the opening move,
-            // this fire-and-forget kicks the computer into action immediately.
+            // If the chosen configuration gives the computer the opening move,
+            // this fire-and-forget kicks it into action immediately.
             _ = MaybeRunComputerTurnAsync();
         }
 
@@ -249,8 +268,6 @@ namespace MancalaProject.Wpf.ViewModels
         /// </summary>
         private async Task MaybeRunComputerTurnAsync()
         {
-            if (_agent == null) return;
-
             // Bail out immediately if it's not actually the computer's turn — e.g.
             // the human got an extra turn and stays on, or the move ended the game.
             // Doing this BEFORE the first delay keeps the new-game / human-extra-turn
@@ -288,7 +305,7 @@ namespace MancalaProject.Wpf.ViewModels
 
                     // Run the search on the thread pool — Hard difficulty's endgame rollout
                     // can take a few hundred ms and we don't want to freeze the window.
-                    int move = await Task.Run(() => _agent!.CalculateMove(_engine), ct);
+                    int move = await Task.Run(() => _agent.CalculateMove(_engine), ct);
 
                     // Re-check cancellation: Task.Run may have completed normally just
                     // before StartNewGame fired. Without this throw, ApplyMove would
@@ -370,20 +387,15 @@ namespace MancalaProject.Wpf.ViewModels
                 ? _engine.CurrentPlayer
                 : (_engine.CurrentPlayer == Player.Player1 ? Player.Player2 : Player.Player1);
 
-        /// <summary>
-        /// User-facing name of a player. Player 2 is shown as "Computer" only when
-        /// the agent is actually controlling that side.
-        /// </summary>
+        /// <summary>User-facing name of a player: "Player 1" for the human, "Computer" for the agent.</summary>
         private string ActorName(Player p) =>
-            p == Player.Player1
-                ? "Player 1"
-                : (_vsComputer ? "Computer" : "Player 2");
+            p == Player.Player1 ? "Player 1" : "Computer";
 
-        /// <summary>"Player X's turn" / "Computer's turn", driven by the engine's current player.</summary>
+        /// <summary>"Player 1's turn" / "Computer's turn", driven by the engine's current player.</summary>
         private string NextTurnText() =>
             _engine.CurrentPlayer == Player.Player1
                 ? "Player 1's turn"
-                : (_vsComputer ? "Computer's turn" : "Player 2's turn");
+                : "Computer's turn";
 
         private string BuildGameOverMessage()
         {
@@ -391,7 +403,7 @@ namespace MancalaProject.Wpf.ViewModels
             return winner switch
             {
                 0 => "Game over — Player 1 wins!",
-                1 => _vsComputer ? "Game over — Computer wins!" : "Game over — Player 2 wins!",
+                1 => "Game over — Computer wins!",
                 _ => "Game over — it's a tie."
             };
         }

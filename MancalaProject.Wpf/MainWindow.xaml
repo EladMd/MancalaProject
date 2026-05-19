@@ -106,7 +106,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- HEADER: title on the left, New Game button on the right.
+        <!-- HEADER: title on the left, Setup + New Game buttons on the right.
              DockPanel with LastChildFill="False" lets each child claim
              only its own size so the title doesn't stretch across. -->
         <Border Grid.Row="0" Background="#3E2A1F" Padding="15,10">
@@ -117,10 +117,16 @@
                            Foreground="White"
                            FontSize="22"
                            FontWeight="Bold"/>
-                <Button Content="New Game"
-                        DockPanel.Dock="Right"
-                        Style="{StaticResource HeaderButtonStyle}"
-                        Command="{Binding NewGameCommand}"/>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <!-- Setup: re-opens the start-up dialog (difficulty + who starts). -->
+                    <Button Content="Setup"
+                            Style="{StaticResource HeaderButtonStyle}"
+                            Click="OnSetupClick"
+                            Margin="0,0,8,0"/>
+                    <Button Content="New Game"
+                            Style="{StaticResource HeaderButtonStyle}"
+                            Command="{Binding NewGameCommand}"/>
+                </StackPanel>
             </DockPanel>
         </Border>
 

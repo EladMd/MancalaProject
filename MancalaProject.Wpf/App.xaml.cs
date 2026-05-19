@@ -16,7 +16,7 @@ namespace MancalaProject.Wpf
         /// <inheritdoc/>
         /// <remarks>
         /// Shows the setup dialog before the main window is created, then launches
-        /// <see cref="MainWindow"/> with the user's chosen mode and difficulty.
+        /// <see cref="MainWindow"/> with the user's chosen difficulty and starting player.
         /// Manages <see cref="Application.ShutdownMode"/> manually to avoid the
         /// race where WPF would otherwise auto-shutdown between dialog close and
         /// main-window show.
@@ -40,7 +40,7 @@ namespace MancalaProject.Wpf
             // or Cancel / closes the window (DialogResult=false or null).
             if (setupWindow.ShowDialog() == true)
             {
-                var mainWindow = new MainWindow(setupVm.IsVsComputer, setupVm.SelectedDifficulty);
+                var mainWindow = new MainWindow(setupVm.SelectedDifficulty, setupVm.ComputerStarts);
                 MainWindow = mainWindow;   // tell the framework which window is "the" main window
                 mainWindow.Show();
 

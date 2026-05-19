@@ -45,6 +45,12 @@ namespace MancalaProject
     ///       is a DAG, not a tree.</item>
     /// </list>
     /// </para>
+    /// <para>
+    /// The Hard difficulty additionally passes the search's chosen move through
+    /// a capture-safety guard (see <see cref="ApplyCaptureGuard"/>). That guard,
+    /// together with Hard's one-ply-deeper search horizon, is what makes Hard
+    /// play more strongly than Medium.
+    /// </para>
     /// </remarks>
     internal static class BeamSearch
     {
@@ -70,10 +76,16 @@ namespace MancalaProject
 
         /// <summary>Easy: 2-ply horizon (my move + the opponent's reply).</summary>
         private const int EasyMaxDepth   = 2;
-        /// <summary>Medium: 4-ply horizon.</summary>
-        private const int MediumMaxDepth = 4;
-        /// <summary>Hard: 6-ply horizon — strongest play.</summary>
-        private const int HardMaxDepth   = 6;
+        /// <summary>Medium: 3-ply horizon — midway between Easy (2) and Hard (4).</summary>
+        private const int MediumMaxDepth = 3;
+        /// <summary>
+        /// Hard: 4-ply horizon — one ply deeper than Medium. Testing showed any
+        /// deeper horizon makes the search unreliable: it begins to trust
+        /// "fantasy" lines that pay off only if the simple opponent model keeps
+        /// blundering. Hard's edge over Medium is its extra ply of depth plus the
+        /// capture-safety guard applied to its final move — see ApplyCaptureGuard.
+        /// </summary>
+        private const int HardMaxDepth   = 4;
 
         /// <summary>Easy: small node-expansion ceiling.</summary>
         private const int EasyBudget   = 100;
@@ -86,8 +98,30 @@ namespace MancalaProject
         private const int EasyBeamWidth   = 4;
         /// <summary>Medium: full beam (≥ max branching factor of 6) so no children are dropped at top level.</summary>
         private const int MediumBeamWidth = 8;
-        /// <summary>Hard: full beam — strength comes from the deeper horizon.</summary>
+        /// <summary>Hard: full beam — same as Medium.</summary>
         private const int HardBeamWidth   = 8;
+
+        // ============================================================
+        //  Capture-safety guard parameters (Hard only)
+        //
+        //  Hard runs the very same search as Medium, then layers one extra
+        //  safeguard on top: it must never PLAY a move that needlessly hands
+        //  the opponent a large free capture when a clearly safer move exists.
+        //  This guard is the single difference between Hard and Medium.
+        // ============================================================
+
+        /// <summary>
+        /// Smallest opponent capture (in stones) the guard treats as worth
+        /// avoiding. A conceded capture below this is minor and left alone.
+        /// </summary>
+        private const int CaptureGuardMinExposure = 3;
+
+        /// <summary>
+        /// How many stones safer an alternative move must be before the guard
+        /// overrides the search. Ensures the guard fires only when a genuinely
+        /// safer move exists, not when the exposure is unavoidable anyway.
+        /// </summary>
+        private const int CaptureGuardMargin = 3;
 
         // ============================================================
         //  UI-coupled timing
@@ -182,7 +216,14 @@ namespace MancalaProject
             // opponent's. This replaces the naïve "best h ever seen anywhere"
             // selection that previously over-rewarded paths passing through
             // catastrophic intermediate states.
-            return SelectBestRootMove(rootChildren, myPlayer);
+            int searchMove = SelectBestRootMove(rootChildren, myPlayer);
+
+            // Hard layers one safeguard on top of the (Medium-strength) search:
+            // it never plays a move that needlessly hands the opponent a large
+            // capture when a clearly safer move exists. See ApplyCaptureGuard.
+            return difficulty == Difficulty.Hard
+                ? ApplyCaptureGuard(engine, rootChildren, myPlayer, searchMove)
+                : searchMove;
         }
 
         // ============================================================
@@ -281,6 +322,129 @@ namespace MancalaProject
 
             // Opponent's turn at this state — single deterministic transition.
             return BackupValue(node.Children[0], myPlayer);
+        }
+
+        // ============================================================
+        //  Capture-safety guard (Hard only)
+        //
+        //  The search above is reliable, but Hard adds one final safeguard:
+        //  it must never PLAY a move that needlessly hands the opponent a
+        //  large free capture when a clearly safer move exists. Medium runs
+        //  the identical search WITHOUT this guard — the guard is the single
+        //  thing that makes Hard play better than Medium.
+        //
+        //  The guard is deliberately conservative: it overrides the search
+        //  only in the clear-cut blunder case (a large capture conceded for
+        //  nothing, with a much safer move available), and even then it just
+        //  narrows the candidates to the safest moves and lets the search's
+        //  own backed-up value choose between them.
+        // ============================================================
+
+        // Returns the move Hard should actually play: the search's own choice,
+        // unless that choice needlessly concedes a large capture.
+        private static int ApplyCaptureGuard(GameEngine engine,
+                                             List<SearchNode> rootChildren,
+                                             Player myPlayer,
+                                             int searchMove)
+        {
+            int searchExposure = OpponentMaxCaptureAfter(engine, searchMove, myPlayer);
+
+            // Nothing meaningful is conceded, or the search move is itself a
+            // capture (a deliberate trade the search chose, not a blunder) —
+            // leave the search's choice untouched.
+            if (searchExposure < CaptureGuardMinExposure
+                || CaptureCountOf(engine, searchMove) > 0)
+                return searchMove;
+
+            // The smallest capture any legal move would concede.
+            int minExposure = MinExposureOverRootMoves(engine, rootChildren, myPlayer);
+
+            // No move is meaningfully safer — the exposure cannot be avoided,
+            // so overriding would gain nothing. Keep the search's choice.
+            if (searchExposure - minExposure < CaptureGuardMargin)
+                return searchMove;
+
+            // A clearly safer move exists and the search move needlessly hands
+            // over a capture. Restrict the candidates to the safest moves and
+            // let the search's own backed-up value choose the best among them.
+            return SafestRootMoveByValue(engine, rootChildren, myPlayer, minExposure);
+        }
+
+        // The smallest opponent capture conceded by any of the root moves.
+        private static int MinExposureOverRootMoves(GameEngine engine,
+                                                    List<SearchNode> rootChildren,
+                                                    Player myPlayer)
+        {
+            int min = int.MaxValue;
+            foreach (SearchNode root in rootChildren)
+            {
+                int exposure = OpponentMaxCaptureAfter(engine, root.RootMove, myPlayer);
+                if (exposure < min) min = exposure;
+            }
+            return min;
+        }
+
+        // Among the root moves that concede only the minimum capture, returns
+        // the one with the highest backed-up search value — so the guard only
+        // narrows the field while the search itself still makes the choice.
+        private static int SafestRootMoveByValue(GameEngine engine,
+                                                 List<SearchNode> rootChildren,
+                                                 Player myPlayer,
+                                                 int minExposure)
+        {
+            SearchNode best = rootChildren[0];
+            double bestValue = SafeRootValue(engine, best, myPlayer, minExposure);
+
+            for (int i = 1; i < rootChildren.Count; i++)
+            {
+                double value = SafeRootValue(engine, rootChildren[i], myPlayer, minExposure);
+                if (value > bestValue)
+                {
+                    bestValue = value;
+                    best = rootChildren[i];
+                }
+            }
+            return best.RootMove;
+        }
+
+        // A root move's backed-up search value if the move is among the safest
+        // (concedes no more than the minimum capture), or negative infinity
+        // otherwise — so SafestRootMoveByValue never selects an unsafe move.
+        private static double SafeRootValue(GameEngine engine,
+                                            SearchNode root,
+                                            Player myPlayer,
+                                            int minExposure)
+        {
+            return OpponentMaxCaptureAfter(engine, root.RootMove, myPlayer) <= minExposure
+                ? BackupValue(root, myPlayer)
+                : double.NegativeInfinity;
+        }
+
+        // The largest capture the opponent could make on their immediate reply
+        // if the agent plays `move` now. Zero when the move keeps the turn (an
+        // extra turn) or ends the game — the opponent does not reply next then.
+        private static int OpponentMaxCaptureAfter(GameEngine engine, int move, Player myPlayer)
+        {
+            GameEngine sim = engine.Clone();
+            sim.ApplyMove(move);
+            if (sim.IsGameOver() || sim.CurrentPlayer == myPlayer)
+                return 0;
+
+            int worst = 0;
+            foreach (int oppMove in sim.GetValidMoves())
+            {
+                int captured = CaptureCountOf(sim, oppMove);
+                if (captured > worst) worst = captured;
+            }
+            return worst;
+        }
+
+        // The number of stones captured by playing `move` from `state`
+        // (zero if the move captures nothing).
+        private static int CaptureCountOf(GameEngine state, int move)
+        {
+            GameEngine sim = state.Clone();
+            return sim.ApplyMove(move).CapturedStoneCount;
         }
 
         // ============================================================

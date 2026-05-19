@@ -41,30 +41,19 @@ namespace MancalaProject
 
         static void RunGame()
         {
-            Console.WriteLine("Choose game mode:");
-            Console.WriteLine("  1. Player vs Player");
-            Console.WriteLine("  2. Player vs Computer");
-            Console.Write("Enter 1 or 2: ");
-            string? modeInput = Console.ReadLine();
-            bool vsComputer = modeInput?.Trim() == "2";
-
-            GreedyAgent? agent = null;
-            if (vsComputer)
+            Console.WriteLine("Choose difficulty:");
+            Console.WriteLine("  1. Easy");
+            Console.WriteLine("  2. Medium");
+            Console.WriteLine("  3. Hard");
+            Console.Write("Enter 1-3: ");
+            string? diffInput = Console.ReadLine();
+            Difficulty diff = diffInput?.Trim() switch
             {
-                Console.WriteLine("\nChoose difficulty:");
-                Console.WriteLine("  1. Easy");
-                Console.WriteLine("  2. Medium");
-                Console.WriteLine("  3. Hard");
-                Console.Write("Enter 1-3: ");
-                string? diffInput = Console.ReadLine();
-                Difficulty diff = diffInput?.Trim() switch
-                {
-                    "1" => Difficulty.Easy,
-                    "2" => Difficulty.Medium,
-                    _ => Difficulty.Hard
-                };
-                agent = new GreedyAgent(Player.Player2, diff);
-            }
+                "1" => Difficulty.Easy,
+                "2" => Difficulty.Medium,
+                _ => Difficulty.Hard
+            };
+            GreedyAgent agent = new GreedyAgent(Player.Player2, diff);
 
             GameEngine engine = new GameEngine();
             string statusMessage = "";
@@ -74,9 +63,9 @@ namespace MancalaProject
                 RenderTurn(engine, statusMessage);
                 statusMessage = "";
 
-                bool isComputerTurn = vsComputer && engine.CurrentPlayer == Player.Player2;
+                bool isComputerTurn = engine.CurrentPlayer == Player.Player2;
                 statusMessage = isComputerTurn
-                    ? RunComputerTurn(engine, agent!)
+                    ? RunComputerTurn(engine, agent)
                     : RunHumanTurn(engine);
             }
 
@@ -87,7 +76,7 @@ namespace MancalaProject
 
             int winner = engine.GetWinner();
             if (winner == 0) Console.WriteLine("Result: Player 1 Wins!");
-            else if (winner == 1) Console.WriteLine(vsComputer ? "Result: Computer Wins!" : "Result: Player 2 Wins!");
+            else if (winner == 1) Console.WriteLine("Result: Computer Wins!");
             else Console.WriteLine("Result: It's a Tie!");
 
             Console.WriteLine("\nPress Enter to exit...");
@@ -119,7 +108,7 @@ namespace MancalaProject
 
         static string RunHumanTurn(GameEngine engine)
         {
-            string playerName = engine.CurrentPlayer == Player.Player1 ? "Player 1" : "Player 2";
+            const string playerName = "Player 1";
             Console.WriteLine($"\n{playerName}'s turn.");
             ShowValidPits(engine);
 
