@@ -46,10 +46,13 @@ namespace MancalaProject
     /// </list>
     /// </para>
     /// <para>
-    /// The Hard difficulty additionally passes the search's chosen move through
-    /// a capture-safety guard (see <see cref="ApplyCaptureGuard"/>). That guard,
-    /// together with Hard's one-ply-deeper search horizon, is what makes Hard
-    /// play more strongly than Medium.
+    /// The Hard difficulty adds two refinements on top of the Medium-strength
+    /// search. Once few stones remain it solves the endgame EXACTLY through
+    /// the <see cref="EndgameSolver"/>, bypassing the approximate search
+    /// altogether; before the endgame it passes the search's chosen move
+    /// through a capture-safety guard (see <see cref="ApplyCaptureGuard"/>).
+    /// Those two refinements, together with Hard's one-ply-deeper search
+    /// horizon, are what make Hard play more strongly than Medium.
     /// </para>
     /// </remarks>
     internal static class BeamSearch
@@ -124,24 +127,6 @@ namespace MancalaProject
         private const int CaptureGuardMargin = 3;
 
         // ============================================================
-        //  UI-coupled timing
-        //  The search will return early if it runs out of wall-clock time
-        //  even before its node budget is exhausted, so the UI never blocks
-        //  beyond this duration.
-        // ============================================================
-
-        /// <summary>
-        /// Hard upper bound on search wall-clock time. The agent returns
-        /// the best move it has found so far if this is reached before the
-        /// node budget is exhausted. Raised from 4000 ms to 5000 ms when
-        /// the chain-greedy picker switched from the cheap
-        /// "score-immediate" rule to the full heuristic evaluation; each
-        /// chain step is now noticeably more expensive, so we extend the
-        /// wall-clock budget to preserve search depth.
-        /// </summary>
-        private const int MaxThinkTimeMs = 5000;
-
-        // ============================================================
         //  Public entry point
         // ============================================================
 
@@ -162,8 +147,19 @@ namespace MancalaProject
             if (validMoves.Count == 1)
                 return validMoves[0];
 
-            int beamWidth = BeamWidthFor(difficulty);
-            int maxDepth  = MaxDepthFor(difficulty);
+            // Endgame solver (Hard only). Once few stones remain, the game tree
+            // down to its terminal positions is small enough to search EXACTLY
+            // — see EndgameSolver. When the solver succeeds its move is provably
+            // best (under the same greedy opponent model used here), so it is
+            // returned directly: the approximate beam search below and the
+            // capture-safety guard are both unnecessary and skipped. Easy and
+            // Medium keep playing the endgame with the heuristic search, so the
+            // difficulty ladder is preserved.
+            if (difficulty == Difficulty.Hard
+                && EndgameSolver.TrySolve(engine, myPlayer, out int solvedMove))
+                return solvedMove;
+
+            (int maxDepth, int totalBudget, int beamWidth) = GetSearchParameters(difficulty);
 
             // The node budget is partitioned EQUALLY among the root moves:
             // every candidate move's subtree gets its own best-first search
@@ -174,9 +170,7 @@ namespace MancalaProject
             // move against shallow siblings whose value is still the raw,
             // over-optimistic h of a near-unexplored position. Equal budget
             // per root ⇒ comparable search depth ⇒ a fair root comparison.
-            int perRootBudget = BudgetFor(difficulty) / validMoves.Count;
-
-            DateTime deadline = DateTime.UtcNow.AddMilliseconds(MaxThinkTimeMs);
+            int perRootBudget = totalBudget / validMoves.Count;
 
             // Transposition table, shared across every root subtree: state
             // hash → cached h. h is a pure function of the position (myPlayer
@@ -206,7 +200,7 @@ namespace MancalaProject
                     myPlayer: myPlayer);
 
                 rootChildren.Add(rootChild);
-                SearchRootSubtree(rootChild, perRootBudget, deadline,
+                RunBeam(rootChild, perRootBudget,
                                   transposition, myPlayer, beamWidth, maxDepth);
             }
 
@@ -236,12 +230,12 @@ namespace MancalaProject
         // priority = -h, so the node popped first is always the highest-h
         // (most promising) state discovered within this subtree. Expansion
         // continues until a node reaches the lookahead horizon (maxDepth),
-        // the per-root node budget is spent, the wall-clock deadline passes,
-        // or the subtree is exhausted. The tree it builds hangs off
-        // rootChild.Children for the later backup pass.
-        private static void SearchRootSubtree(SearchNode rootChild,
+        // the per-root node budget is spent, or the subtree is exhausted.
+        // The loop depends on no wall-clock time, so the search is a pure,
+        // deterministic function of the position. The tree it builds hangs
+        // off rootChild.Children for the later backup pass.
+        private static void RunBeam(SearchNode rootChild,
                                               int budget,
-                                              DateTime deadline,
                                               Dictionary<long, double> transposition,
                                               Player myPlayer,
                                               int beamWidth,
@@ -251,9 +245,7 @@ namespace MancalaProject
             frontier.Push(rootChild, -rootChild.H);
 
             int expanded = 0;
-            while (expanded < budget
-                   && DateTime.UtcNow < deadline
-                   && frontier.Count > 0)
+            while (expanded < budget && frontier.Count > 0)
             {
                 SearchNode current = frontier.Pop();
 
@@ -280,11 +272,11 @@ namespace MancalaProject
         private static int SelectBestRootMove(List<SearchNode> rootChildren, Player myPlayer)
         {
             SearchNode best = rootChildren[0];
-            double bestValue = BackupValue(best, myPlayer);
+            double bestValue = Backup(best, myPlayer);
 
             for (int i = 1; i < rootChildren.Count; i++)
             {
-                double v = BackupValue(rootChildren[i], myPlayer);
+                double v = Backup(rootChildren[i], myPlayer);
                 if (v > bestValue)
                 {
                     bestValue = v;
@@ -304,7 +296,7 @@ namespace MancalaProject
         // opponent's options and take a min. There is only one child per
         // opponent node (the greedy move our model predicted) and we just
         // forward its value upward.
-        private static double BackupValue(SearchNode node, Player myPlayer)
+        private static double Backup(SearchNode node, Player myPlayer)
         {
             if (node.Children.Count == 0)
                 return node.H;
@@ -314,14 +306,14 @@ namespace MancalaProject
                 double best = double.NegativeInfinity;
                 foreach (SearchNode child in node.Children)
                 {
-                    double v = BackupValue(child, myPlayer);
+                    double v = Backup(child, myPlayer);
                     if (v > best) best = v;
                 }
                 return best;
             }
 
             // Opponent's turn at this state — single deterministic transition.
-            return BackupValue(node.Children[0], myPlayer);
+            return Backup(node.Children[0], myPlayer);
         }
 
         // ============================================================
@@ -416,7 +408,7 @@ namespace MancalaProject
                                             int minExposure)
         {
             return OpponentMaxCaptureAfter(engine, root.RootMove, myPlayer) <= minExposure
-                ? BackupValue(root, myPlayer)
+                ? Backup(root, myPlayer)
                 : double.NegativeInfinity;
         }
 
@@ -475,6 +467,12 @@ namespace MancalaProject
                 _                 => HardBeamWidth
             };
 
+        // Bundles the three difficulty-scaled search parameters — lookahead
+        // horizon, node budget and beam width — into a single tuple, so a
+        // caller fetches all three in one step.
+        private static (int MaxDepth, int Budget, int BeamWidth) GetSearchParameters(Difficulty d) =>
+            (MaxDepthFor(d), BudgetFor(d), BeamWidthFor(d));
+
         // ============================================================
         //  Node expansion (asymmetric — branching only on my turn)
         // ============================================================
@@ -486,14 +484,14 @@ namespace MancalaProject
                                        int beamWidth)
         {
             if (current.State.CurrentPlayer == myPlayer)
-                ExpandMyNode(current, frontier, transposition, myPlayer, beamWidth);
+                ExpandAgentNode(current, frontier, transposition, myPlayer, beamWidth);
             else
                 ExpandOpponentNode(current, frontier, transposition, myPlayer);
         }
 
         // My turn: branch — generate every legal move and keep the top K
         // children by h. This is the source of search depth in our algorithm.
-        private static void ExpandMyNode(SearchNode current,
+        private static void ExpandAgentNode(SearchNode current,
                                          MinHeap<SearchNode, double> frontier,
                                          Dictionary<long, double> transposition,
                                          Player myPlayer,
@@ -573,7 +571,7 @@ namespace MancalaProject
                 RunChainGreedy(childState, movingPlayer);
 
             GamePhase phase = PhaseAutomaton.Detect(childState, myPlayer);
-            long hash = HashState(childState);
+            long hash = HashFNV1a(childState);
             double h = LookupOrEvaluate(childState, hash, phase, myPlayer, transposition);
 
             return new SearchNode(childState, rootMove, parentDepth + 1, h, phase);
@@ -654,11 +652,16 @@ namespace MancalaProject
         //  Greedy opponent transition (single-track, NOT a min layer)
         // ============================================================
 
-        // The opponent picks the move that maximizes THEIR own heuristic value
-        // (not the move that minimizes ours). This is the explicit modeling
-        // choice that makes our algorithm distinct from Minimax: we assume the
-        // opponent plays greedily for themselves, not adversarially against us.
-        private static int SimulateGreedyOpponentMove(GameEngine state)
+        /// <summary>
+        /// Returns the move the opponent is predicted to play at <paramref name="state"/>:
+        /// the move that maximizes THEIR own heuristic value (not the move that
+        /// minimizes ours). This is the explicit modeling choice that makes the
+        /// agent distinct from Minimax — the opponent is assumed to play greedily
+        /// for themselves, not adversarially against us. Exposed as <c>internal</c>
+        /// so the <see cref="EndgameSolver"/> can reuse the very same opponent
+        /// model for its opponent-turn transitions.
+        /// </summary>
+        internal static int SimulateGreedyOpponentMove(GameEngine state)
         {
             Player opponent = state.CurrentPlayer;
             List<int> moves = state.GetValidMoves();
@@ -691,7 +694,7 @@ namespace MancalaProject
         // FNV-1a 64-bit. Cryptographic strength is not required — only a
         // good distribution over Mancala's reachable states. Combines the
         // 14 pit counts and the current player into a single long.
-        private static long HashState(GameEngine state)
+        private static long HashFNV1a(GameEngine state)
         {
             const long FnvOffsetBasis = unchecked((long)0xcbf29ce484222325);
             const long FnvPrime       = 0x100000001b3;

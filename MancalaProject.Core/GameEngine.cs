@@ -98,6 +98,31 @@ namespace MancalaProject
             _isFinalized = source._isFinalized;
         }
 
+        /// <summary>
+        /// Test-support constructor: builds an engine at an arbitrary position.
+        /// Exposed as <c>internal</c> so the unit-test project can set up
+        /// specific board configurations (captures, endgames, finished games)
+        /// directly, instead of replaying long move sequences to reach them.
+        /// It is invisible to the WPF and Console front-ends.
+        /// </summary>
+        /// <param name="board">The 14 cell counts to copy onto the board (indices 0-13).</param>
+        /// <param name="currentPlayer">The player whose turn it is.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="board"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="board"/> does not have exactly <see cref="BoardSize"/> entries.</exception>
+        internal GameEngine(IReadOnlyList<int> board, Player currentPlayer)
+        {
+            if (board is null)
+                throw new ArgumentNullException(nameof(board));
+            if (board.Count != BoardSize)
+                throw new ArgumentException($"Board must have exactly {BoardSize} cells.", nameof(board));
+
+            _board = new int[BoardSize];
+            for (int i = 0; i < BoardSize; i++)
+                _board[i] = board[i];
+
+            CurrentPlayer = currentPlayer;
+        }
+
         private void InitializeBoard()
         {
             for (int i = 0; i < BoardSize; i++)

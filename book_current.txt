@@ -1,0 +1,2868 @@
+                                                                              
+
+    
+
+            : 
+        330925546 : ..
+
+               : 
+         23.5.2026 : 
+                                                                     .4
+
+  .   ,        
+           -      ,   
+                                                           .      ,
+
+                                                       )Kalah(    4.1
+
+    .    ,   12-  :) / Pit(  
+                                            . 4      ; 
+
+      .    ,    :) / Store(  
+           .         .  
+
+             :   :)Sowing(  
+  .      ,   ,  -  
+
+                  :)Capture(  /  
+             ,  ) (   ,
+
+                                                             .    , 
+
+     ,         :)Extra Turn(   
+                         .)Chain(       .  
+
+         .  ,       :  
+                                             .        
+
+         ,         :)Starvation(  
+                                                             .     
+
+             :)Hoarding(  
+                                                                                                 .
+                                                               4.2
+
+ , 14-     :    :)Board State(   
+         )Vertex(        .    
+                                                                                             .
+
+       )Edge(    .    :)Move(  
+                                                                               .   
+
+ = "6 " :(      - )-( plies-  :  
+                                                                            .)  
+
+, ,(        :)Game Phase(   
+                  ,)- , ,
+                                                                                 . 
+
+         :)FSA - Finite-State Automaton(   
+                                         .     
+
+        :)h(   /  
+                             .   -   h-  .   
+
+          :)Branching Factor(   
+                                                                 .   , .
+
+    "" .        :)Frontier(  
+                                                                                             .
+
+  K     :)Beam / Beam Width, K(    
+                  .      .  ,  h-
+
+      .  plies-    :)Depth Horizon(   
+                                                             .     
+
+          :)Transposition Table(   
+      ,   ,    
+
+                                                                 .)DAG( -  
+
+       , -     ,  :)Backup(   
+                    .      ,   
+                                                  )(   .5
+
+                                                                            5.1
+
+                                                           : 14-      
+
+                       .     ,    :  12 
+                   .    ,       : 2 
+
+ .)   48  (  4    12-   : 
+                                                                           .   
+
+       .) (    2  ,   1  :
+    .           ,
+
+                        :          ,
+
+         ,       , :)Sowing(  
+        .         ,
+
+                         .      ,     ,
+
+                :)Capture(  
+   :  ,        , 
+     ,           
+
+                                                                                          . 
+
+           :)Extra Turn(   
+          .     , 
+
+                                                  .     )Chain( 
+
+                                                                        5.2
+
+   )(             
+                 48      .  
+
+   )   25(      ,      -
+ .         ,      
+
+                                                                          5.3
+
+       :            
+         .        
+               :)FinalizeBoard( 
+        .    ,   
+   ,        :   
+                                                                    .   24  24 
+
+                                                           .6
+
+   ,            
+                                                                                .  
+
+                                                                          6.1
+
+     .     )Kalah (  
+                                                          :      ,
+
+                                               .       :- 
+      .    :)Perfect Information(   
+
+                                                              .      
+            ,      : 
+
+                                                     .       .
+   (           :- 
+
+                                                                              .)   
+
+           ,           
+               .           ,-
+
+                                                            6.2
+
+                 :     .      
+
+   14-  (     :)Vertex(  
+                                                                                          .) 
+
+                           .        :)Edge(  
+
+             ,        
+  -    ,         .
+    .             ,)DAG(
+    ""   ,         
+
+                                                                                        .  DAG
+
+                                                         6.3
+
+       ,Minimax-     :    
+    .      )  (      
+    ,)Alpha-Beta Pruning( "- "    
+
+                .     
+               ,
+                                                                                              .
+
+        ,     :)h(    
+"   "    -    
+
+      .        .   
+
+       Best-First     :)Informed Search(   
+ ,          ,A*- Search
+ Beam        .      
+
+        )K(        ,) ( Search
+                                                                                  .  
+
+         :)Finite-State Automata(   
+  )FSA(     ,  .   
+   )   , (          
+
+                           .       
+
+     ,   :)Transposition Tables(   
+            .    
+
+                                       .DAG        
+
+                                                             6.4
+
+ . Kalah     )Irving, Donkers, Uiterwijk(  ,2000 
+    , 4-   - )Kalah(6,4 ,    
+
+                    )Retrograde Analysis(  
+ ,         .)First-player win(
+"" :      .    
+
+        ,         
+                                                  .       
+
+                                          .7
+
+                                                                        7.1
+
+       ,          
+      ,)  (     
+
+     Monte Carlo Tree  Minimax, Alpha-Beta Pruning :  
+                                                                                          .)Search (MCTS
+
+                                              " "     7.2
+
+        ,NP-    " "    
+         :        .    
+               :   
+  ,    )6.4 ( ""    .  
+
+                               .         
+
+         :)Explosive State Space(    
+        b      (     
+
+             d^6-     d   ,  .)6-
+6  (      .)   ( 
+
+      ,  46,656 = 6^6-  )plies
+           ,  .   
+
+        " "     ,  
+                                                  .      
+
+                                                 7.3
+
+                           :       ,  
+
+          ,      :)Chaining(    
+       .""          
+           "  " ,
+
+                                                               .    , 
+
+    ,(        :)Traps(   
+             ,) 
+
+            , .    
+                                                                                        . 
+
+                                                              7.4
+
+         )Minimax/AB(    ,    
+                          :    ,     )13 ( 
+
+               .       :)Look-ahead(    .1
+               :    .2
+
+                                               .)   (  
+    Beam Search       :   .3
+
+                                                               .   
+
+                                                               .9- 8     
+
+                                       .8
+   ,          
+      ,       ,   
+                                                                                    .  
+
+                                            )(     8.1
+
+   .-      :)( Minimax 
+            :     
+
+    ,)MIN(        ,)MAX( 
+                                                                   .    
+
+        .         : 
+        ,  .O(b^d( -    : 
+
+         ,       
+                                            .     
+
+    ,    :)- ( Alpha-Beta Pruning 
+.             
+
+                                    .      : 
+    .      : 
+
+           ,     ,)Move Ordering(   
+                                   .      
+
+   :)-   - MCTS (Monte Carlo Tree Search 
+      )Playouts(         
+                      .        , 
+
+           : 
+                  , 
+
+          .  
+                                                 
+
+         ,     : 
+        , .     
+           ,   
+
+                                                                                        .
+
+                :   
+         SWOT-      ,  
+
+                                                    .      
+
+                                           )Naive Greedy(    8.2
+
+     .)Look-ahead(          
+                 ,   
+                 .)         ,(   
+
+                            .        : 
+             . " "  : 
+          .     ,      ,
+
+       ,      
+                                                                                     . 
+
+                                           )Informed Search(    8.3
+
+           
+           ,      .  
+                                                                                               : 
+
+                    :Best-First Search 
+      ,           ,)Frontier(
+
+                                             .        
+
+                ,Best-First    :*A 
+           )g(     
+
+                                                                             .)h(   
+
+    .        :) ( Beam Search 
+         ,)K(     
+
+         ,        K  
+                 .  
+                                           .     
+
+                              8.4
+
+                              
+                                    ?
+
+Minimax  ,                     - 
+                MAX/MIN                                            .
+
+Alpha-Beta                     - 
+                                                                   .
+
+                    
+MCTS                                 - 
+                                                                       . 
+
+                                                   - 
+                   ,                                  .)" "(
+
+                             
+
+Best-First / *A                                    - 
+                                                               .
+
+                         
+
+Beam Search                                        - 
+                 K-                             .  
+
+                              
+
+                                                                                               
+                                                                                     8.5
+
+  )Minimax, Alpha-Beta, MCTS(     
+                        -
+          .       ,     .
+
+   ,           ,
+    ,      Best-First Beam Search 
+
+            .)FSA(    
+                                                                                                       .9 
+
+                  ) (    .9
+
+                                                                             9.1
+
+            
+          .)Phase-Aware Best-First Beam Search( -
+
+ ,       )Informed Search( - 
+        -       .8  
+               .      ,       ,)DAG(
+   ,            
+                               :        
+
+         :)FSA(    .1
+                                                                                   .)9.3 ( 
+
+ ,       :    .2
+                     .)9.4 (       
+
+           :Best-First Beam Search   .3
+                               .)9.5 (       )Pruning(
+
+           :)Transposition Table(   .4
+                                                          .)9.6 (   
+
+               ,)Hard(     
+  (    )Capture Guard( -  :  
+ (       )Endgame Solver(    ,)9.8
+
+                                                                                                           .)9.9
+
+                                    :         
+
+       ,)  12- (     ,Hard     
+    ,    .    
+
+                                                                                  . 
+
+       .    ,   
+                 ,  
+                                                   .       )Backup(
+
+     Capture-        ,Hard     
+   ,          .Guard
+
+                                   .      )Override( 
+
+                               .14        -
+
+                                                          , :  9.2
+
+         .          
+        ,)Perfect Opponent( " "  )8.1 ( 
+    .            
+
+                                      .        
+
+    .)Adversarial Greedy(           
+      :-         
+                ,
+
+                                   .)         ( 
+
+                                                                   :     
+            :  
+,             .
+
+                                    .       
+
+   )  min- (    :    
+    ,) 13 (       
+
+      -     min- max    
+                                                                    .    
+
+ Adversarial Greedy"-        ,    
+      .      "Search
+
+                                             Core/Algorithms/BeamSearch.cs( 
+          .)SimulateGreedyOpponentMove
+        ,       ,
+
+        .     ,     
+                    .      ,     
+
+                                             )FSA(    :1  9.3
+
+ enum GamePhase    )Finite-State Automaton(   
+                .   
+                                                        :     
+
+                                      )State( 
+                                 
+
+,   .                                 Opening
+                             12-
+                       .  
+                                36
+
+     .                                Midgame
+
+ ,    ,    12-
+
+.                           36- 12
+
+,    .                                Endgame
+                             12-
+
+                 .              12- 
+     .                                    StarvationMode
+
+       . 3  
+
+.                               
+
+    .                             2       CaptureChain
+    .                              
+                           .            
+
+  )O(1          )Stateless( -  
+             .     , 14    
+
+             ,        
+                                          :       
+
+                  StarvationMode  CaptureChain  Endgame  Midgame  Opening
+
+  )Piecewise Function(          
+            ,    
+
+                                                                                                          .
+
+                                    :2  9.4
+
+    .       )h(   
+                   :   .        ,
+
+h(state) = w1 * S + w2 * (myCapture - oppCapture) + w3 * D + ChainBonus -
+StarvationPenalty
+
+                                                                                       :  
+          :)  ( S 
+
+                                                                 .    .
+
+        :)  ( )myCapture - oppCapture( 
+      )2.0 (     .    
+
+        )0.5 (   ,     
+             .   
+
+                                                                                                 .
+
+""  .        :) ( D 
+                                                     .     
+  FSA-         " " 
+                 :      ,  )w1, w2, w3( 
+
+                                                
+                      w3        w2        w1
+
+                )(        )(         )(
+
+--              1.0       0.7       0.4       Opening
+
+--              1.0       0.6       0.3       Midgame
+
+( 1.5-          0.1       0.4       1.5       Endgame
+
+ .)  
+
+.0.1-  
+
+                0.2-      1.0       0.6 StarvationMode
+
+    ;)0.2-(
+
+.    
+
+1.2-            1.0       1.2       0.3 CaptureChain
+
+.ChainBonus-  
+
+                                                                                   :  
+  CaptureChain-    :) ( ChainBonus 
+
+          ,         1.5 
+                                                          .    
+
+ 3    ) (  :) ( StarvationPenalty 
+   ,      3.0      .   
+      ""          
+                                                                                          .
+      IsGameOver ==(         :  
+
+  ,     .    ,)true
+  .10,000       ,     
+                     
+                                                                          .    ,
+
+                              Best-First Beam Search   :3  9.5
+
+   .          
+                                                                                  :  
+
+        :)Frontier(    
+          ,)h-(       .)MinHeap(
+
+    O(log(            
+                               .)Best-First(        ,))n
+
+               :      
+                 
+         .   
+          -    ,
+       Backup-         ,
+
+                                                           .    
+
+        :)  ­ Beam Pruning(   
+                                                                                  :  
+
+    ,      :   
+(        K    
+
+                                   .      ,)
+         ,       :   
+        )Single-child path(      
+
+                                                        .    
+
+          " "  :    
+                  . 
+   ,  .        
+
+         .    ,    " "   
+
+  .)    (       :   
+            ,       
+               .        ,  
+
+      -        
+                                                                                      .  
+
+                                                        :4  9.6
+
+                
+                     ,     
+                                                                               .>Dictionary<long, double
+       )FNV-1a (64-bit        
+       ,   14      XOR-  
+            .)O(1       .
+    ( Zobrist Hashing         
+          ,     ,)   
+.Zobrist-            
+
+      ,)DAG( -          "" 
+                                                   .       
+
+                                            Backup-  :   9.7
+
+    )Backup(      ,    
+             . 
+
+                :          , 
+
+        :)     (   
+                                                                  ".)Value = h(   
+
+       :) MAX (    
+       .))Value = \max(Children(     Backup- 
+                                  .         
+
+           :) (    
+    Backup-        .  
+
+                                                     .    ,  
+
+      Backup-             
+          "        .   
+
+    ,          ,"   
+                         .      ""  
+
+                       )Hard-  ­ Capture Guard( -  9.8
+
+ - " "     ,      
+           ,        
+                                                  .       
+
+             Hard   ,     
+                                       :     )ApplyCaptureGuard(
+
+            :  
+                                                           .     
+
+                   :  
+           ,)    3  ( 
+                          .  " "   -   
+
+        ,       :)Override(   
+    (         
+
+                                     .       ,)
+
+                  Capture Guard- 
+               
+
+                                              .  ,     ,Hard- 
+
+                       )Hard-  ­ Endgame Solver(    9.9
+
+       ,Hard     ,    
+        12-     .)EndgameSolver( 
+.           , 12-
+
+                : Beam Search-         , 
+
+           :    
+         .)IsGameOver == true(    
+
+     .       FinalizeBoard-
+                                           .      
+
+              : -  
+                        ,   )max( 
+
+      . min    ,)SimulateGreedyOpponentMove(
+                                             .      
+
+          :)Memoization(     
+    14      >Dictionary<string, int 
+
+      DAG          .)12.7  (
+                                                                                               .
+
+                  :  
+  250,000   )Safety Budget(    ,  
+
+         ,  ,     . 
+                                      . Beam-     )Fallback(
+
+           -    Hard-     
+               .          
+
+                                                              9.10
+
+     ,        
+                                   :        
+                                                   
+    )Guard / Solver( )K( 
+                               Node(  Depth( 
+
+                               )Budget  )Horizon
+
+  4                             100     plies 2   Easy
+            
+                                        ) (
+
+  8                             500     plies 3 Medium
+            
+                                        ) (
+
+Capture Guard               8   2,000   plies 4   Hard
+Endgame   +                 
+                                        ) (
+                   Solver
+
+                                                                                                        
+            7     :  
+
+                               ,
+                      .)DateTime(
+           ,  .      
+                  ,       , 
+                      .   
+            .        ,    
+
+                         ?       9.11
+
+       Minimax, :        13 
+        .MCTS- ,Alpha-Beta Pruning
+
+                                                                                   :   
+
+       :)No MIN Layer(    .1
+                   
+
+            .)min(   
+              ,         ;
+                                  .       -
+
+    ,Backup-  :)Asymmetric Backup( -   .2
+       ,  .  min- max   
+
+                .    ,     
+               :     .3
+      .      )DFS( 
+ .)MinHeap(           
+
+              :    .4
+                    .
+
+                                                              .)FSA(    
+
+ ,         :    .5
+                .-         
+
+               )( MCTS   :   .6
+        ,  )Playouts(  
+
+                                                  .      
+
+       ,        ,)EndgameSolver(    
+                .     min  
+
+             ,      -
+                                                                                              .  
+
+         )Top-down Level Design(    .10
+
+       .)18 (   ,MVVM      
+                          Solution       
+
+      ,)MancalaProject.Core( ,   :)MancalaProject.sln(
+          ,)MancalaProject.Console(     ,)MancalaProject.Wpf(
+                                      .)MancalaProject.Tests(    
+
+                                                                                     solution explorer 
+
+                               : -    -     
+
+                                                                        .  Wpf  Core 
+                                                                  .  Console  Core 
+                                             .        Core 
+
+   :      ,       
+    UI      ,)net8.0-windows ( net8.0    Core-
+
+      )Core- ( Model-  .     ,WPF  
+ ,         ;   
+                               .       ViewModel-
+
+           ) - UML Use Cases( -  .11
+
+        ,        
+"       "  "    .
+
+  .           ," 
+
+                                                                                          draw.io 
+
+:   
+        
+
+Easy / Medium(        ,   
+
+.)  (        )/ Hard                 
+
+   .         
+                         .    )»include«(  
+
+ ,     .                              
+                          .     -  
+
+    ;   "Setup"                       
+  .                                      
+
+      "New Game"     
+
+.                                    
+     ,      
+
+          .) /  / (        
+
+                                                              .12
+
+        )10 (     
+              , 
+                                                                                  .   
+
+                                                                               12.1
+
+       .)]int[14( 14         
+                                                                                           :  
+
+                                             .1      :5­0  
+                                                            .1   )(  :6  
+
+                                           .2      :12­7  
+                                                          .2   )(  :13  
+
+    , .   )O(1        
+      ,      )Clone(   
+                                                                             .    
+
+                                          ) ( MinHeap ­   12.2
+
+       .       ) ( 
+    ,i     :         
+
+                               .2i+2- 2i+1    ,) i - 1) / 2   
+
+                           
+
+)O(log n bubble-up         Push
+
+)O(log n       ,           Pop
+
+          bubble-down
+)O(1            Peek
+
+      )MinHeap<TItem, TPriority<(    
+     (        .
+
+    bubble-up-  .)-h(       ,)  
+    )Tail-recursion( -   bubble-down-
+
+                         .        ,break
+
+                                                    SearchNode -   12.3
+
+      .SearchNode          
+           ,   ,  -  ,    :
+
+      .)Children(        ,
+        .  backup-    ,  
+
+                "-"  ;  
+                                                               .     
+
+                                                                   12.4
+
+                   
+       .Dictionary<long, double<     , 
+
+            ,      14    
+          .)O(1        .  
+   ,)DAG( -         ""
+
+                                                                                                 . 
+
+                                                      )FSA(    12.5
+
+    ,enum GamePhase         
+                  ,Opening, Midgame, Endgame, StarvationMode :  
+
+             .CaptureChain-
+       .  14       )O(1    
+                 :)Stateless( -
+                                                                                                         .
+
+                                           MoveResult ­    12.6
+
+      )Immutable(      record  
+                  .     
+
+       ,       ,
+       )Init-only(         .
+
+          )Immutability(    record-  .
+     #C   )const(    ,    
+                                                                .    
+
+                                                                                               
+ )EndgameSolver Memoization(       12.7
+
+     Dictionary<string,       EndgameSolver- 
+ )    (         .>int
+
+                                     .          
+
+            
+                                   :(        , 14-
+
+              .)"P1|4,4,4,4,4,4,0,4,4,4,4,4,4,0"
+                                                                           .   
+
+       ,             
+         ,)DAG(        ""
+
+        )long   (     .   
+    )Debugging(        
+
+  .           , 
+                      .) 250,000(          
+
+      .13
+
+                                                      
+
+ -  .                                           #C  
+                          . 15    
+
+    )Declarative(                               XAML   
+                                       .WPF-              
+
+.                                               NET 8.0.  
+ - Windows Presentation Foundation  WPF UI 
+     .     
+
+  ,                                 Visual  
+
+.) 17 (  Studio 2022                )IDE(
+
+   )MancalaProject.sln(     Solution  
+                                               . 
+
+                                                                                    :WPF- #C  
+
+        , -   #C  
+      WPF  .     
+
+               ,  Data Binding- 
+                                                            .    MVVM 
+
+ )Class Library(         
+                .)MancalaProject.Core( 
+
+    WPF-          ,
+                                                                 .    
+
+                                       )-(   .14
+
+       ,    -    
+                  .      
+
+    ,)RunBeam(    ,)FindBestMove(   : 
+                  -     ,)Backup(    
+
+    9           .)ApplyCaptureGuard(
+                                                                                                 .17.3 
+
+                       .      :-  
+
+                                                      .    //  
+
+                   :        
+                                                                      .)Name(parameters
+                                     FindBestMove ­   14.1
+
+                                         :)FindBestMove (engine, difficulty, player 
+
+                                                                                                    :
+
+                                                             // engine
+                                   Easy / Medium / Hard)(    // difficulty
+
+                                           )Player1 / Player2(    // player
+
+                                                                                                   :
+                                                    // bestMove
+
+                      )Hard- (   ­     :1  //
+             : )TotalStonesInPits(engine) < 12  difficulty == Difficulty.Hard( 
+
+                                                                                   1-   
+        : )true == )  EndgameSolver.TrySolve(engine, player, out( 
+
+                       Beam-   ,    //   
+
+      )plies 2/3/4 (        :2  //
+
+                         )horizon, totalBudget, K)  GetSearchParameters(difficulty(
+
+// Easy: (2, 100, 4) 
+// Medium: (3, 500, 8)
+// Hard: (4, 2000, 8)
+
+                         -        :3  //
+                                                     engine.GetValidMoves()   
+
+                            ) (totalBudget / Length     budget
+                                                                  rootChildren
+
+                                                              :    move 
+
+                                                                 childEngine  engine.Clone()
+                                                                childEngine.ApplyMove(move)
+                               phase  PhaseAutomaton.Detect(childEngine, player)
+                                     h  Heuristic.Evaluate(childEngine, player, phase)
+          node  SearchNode(childEngine, rootMove: move, depth: 1, h, phase)
+                           K, horizon, player) ,   RunBeam(node, budget
+                                                        )node.Value  Backup(node, player
+                                                         rootChildren   node  
+
+                                                                                                        
+           Backup-         :4  //
+
+                       bestNode  Argmax(rootChildren, key: node  node.Value)
+                                                        chosenMove  bestNode.RootMove
+
+                                                                                                        
+                        )Hard- (   ­     :5  //
+
+                                                            : )difficulty == Difficulty.Hard( 
+
+                  chosenMove  ApplyCaptureGuard(engine, rootChildren, player,
+                                                                                       )chosenMove
+
+                                                                                chosenMove 
+                                                                                            
+
+                                           RunBeam ­    14.2
+
+                      :)RunBeam (rootNode, budget, K, horizon, agentPlayer 
+
+                                                                                                    :
+
+                                                   -    // rootNode
+                                -      // budget
+
+                                    )   (    // K
+                                  plies       // horizon
+
+                                                               // agentPlayer
+
+ H)- :   (    //  MinHeap   frontier
+               Dictionary<long, double>      transpositionTable
+                                                                             nodesExpanded  0
+
+                                             )frontier.Push(rootNode, priority: -rootNode.H
+
+             : )frontier.IsEmpty == false  nodesExpanded < budget(  
+
+         // )(current  frontier.Pop
+                                                   nodesExpanded  nodesExpanded + 1
+
+                              )     (     //
+           : )current.State.IsGameOver == true  current.Depth >= horizon( 
+
+   Backup-    ,   //   
+                         FNV-1a)   (     //
+                                 )key  HashFNV1a(current.State, current.NextPlayer
+                                        : )transpositionTable.Contains(key) == true( 
+
+                                                         ]current.H  transpositionTable[key
+                ,     //   
+
+                                                                                                 :
+                                                          transpositionTable[key]  current.H
+
+                                                //
+                                                                              children
+
+                                                : )current.NextPlayer == agentPlayer( 
+
+                               )children  ExpandAgentNode(current, K, agentPlayer
+                                                                                                 :
+
+                              )children  ExpandOpponentNode(current, agentPlayer
+
+                                                                  : children  child 
+                                                                     current.Children.Add(child)
+
+                                                         )frontier.Push(child, priority: -child.H
+                                                                                            
+
+                                                                                                        
+                                    :)ExpandAgentNode (parent, K, agentPlayer 
+
+                                                                          candidates
+                                           )(parent.State.GetValidMoves   
+
+                                                           :    move 
+
+                                                         )(childEngine  parent.State.Clone
+                                                   )childEngine.ApplyMove(move  
+             ,       :    //
+     ,       ApplyMove-
+
+                                                                               .  
+                       phase  PhaseAutomaton.Detect(childEngine, agentPlayer)
+
+                             h  Heuristic.Evaluate(childEngine, agentPlayer, phase)
+        child  SearchNode(childEngine, parent.RootMove, parent.Depth + 1, h,
+
+                                                                                                )phase
+                                                            candidates   child  
+
+                 :)Beam Pruning(    //
+                                              H     candidates   
+
+                                    candidates     K  
+                                                                                            
+                                :)ExpandOpponentNode (parent, agentPlayer 
+
+ MIN       :)Adversarial Greedy(    //
+                        SimulateGreedyOpponentMove(parent.State)   
+                                                      )(childEngine  parent.State.Clone
+                                                                       : )1-   ( 
+
+                                                        ) (childEngine.ApplyMove
+                     phase  PhaseAutomaton.Detect(childEngine, agentPlayer)
+
+                          h  Heuristic.Evaluate(childEngine, agentPlayer, phase)
+ SearchNode(childEngine, parent.RootMove, parent.Depth + 1, h,  child
+
+                                                                                             )phase
+                                                  child    
+
+                                                                                         
+
+                                 Backup ­     14.3
+
+                                                       :)Backup (node, agentPlayer 
+
+                                                                                                 :
+
+                                                                    // node
+                                                             // agentPlayer
+
+                                                                                                 :
+
+                                                             // value
+                                                                                                     
+
+             )      (    :  //
+                                                              : )  node.Children( 
+
+                                                 : )node.State.IsGameOver == true( 
+
+                         :   //
+            (scoreDiff  node.State.Store(agentPlayer) - node.State.Store
+
+                                                                             ))agentPlayer(
+                                                                        scoreDiff * 10000 
+
+                                                                                              :
+                                       // node.H 
+
+                              :  //
+                                                                      childValues
+
+                                                        : node.Children  child 
+
+                          childValues   )Backup(child, agentPlayer  
+                                                  : )node.NextPlayer == agentPlayer( 
+                              ­ )MAX(     //
+
+                                                                          )Max(childValues 
+                                                                                                :
+
+    MIN   ,      ­     //
+                                                                              ]childValues[0 
+                                                                                           
+
+                        ApplyCaptureGuard ­    14.4
+
+                     ApplyCaptureGuard (engine, rootChildren, agentPlayer, 
+                                                                                   :)candidateMove
+
+                                                                                                   :
+                                                                                                       
+
+                                        // engine
+                                      // rootChildren
+
+                                                              // agentPlayer
+                    Beam-        // candidateMove
+
+                                                                                                    :
+
+              )    (     // safeMove
+                                                                                                       
+
+                                                                                                :
+
+     3   // FREE_CAPTURE_THRESHOLD  3
+                                                                                             
+
+                      :1  //
+                                                            )(afterCandidate  engine.Clone
+
+                          afterCandidate.ApplyMove(candidateMove)   
+               candidateMove         myCapture
+
+                                                                             opponentReply  0
+                                                                                0    
+
+                 : ))agentPlayer(  == afterCandidate.CurrentPlayer( 
+                                                                                                       
+
+               opponentReply  SimulateGreedyOpponentMove(afterCandidate)
+                                                       )(afterReply  afterCandidate.Clone
+
+                                   )afterReply.ApplyMove(opponentReply   
+                                        CapturedStoneCount.     
+                                :2  //
+
+      )FREE_CAPTURE_THRESHOLD =>   (   
+                                                            )   < myCapture(
+                                                             : )false ==  ( 
+
+         ,       // candidateMove 
+
+         )Override(    :3  //
+                                                                          safestMove  null
+
+                                                                      minExposure
+                                                       : rootChildren  child 
+
+                                          : )child.RootMove == candidateMove( 
+
+                                         //   
+
+                                                                )(afterAlt  engine.Clone
+                       afterAlt.ApplyMove(child.RootMove)   
+
+                                           myAltGain
+                                                                            oppAltReply  0
+
+                                                                        0   exposure
+                      : ))agentPlayer(  == afterAlt.CurrentPlayer( 
+
+                       oppAltReply  SimulateGreedyOpponentMove(afterAlt)
+                                                        afterAltReply  afterAlt.Clone()
+
+                               altResult  afterAltReply.ApplyMove(oppAltReply)
+                                  altResult.CapturedStoneCount   exposure
+
+                                       myAltGain -  exposure    
+                                                 : )minExposure <   ( 
+
+                                                              minExposure
+                                                          safestMove  child.RootMove
+
+                                 :4  //
+ : ))myCapture -   ( < minExposure  safestMove  null( 
+
+                                                                            safestMove 
+                                                                                           :
+
+    ,      // candidateMove 
+                                                                                    
+                  EndgameSolver.TrySolve ­    14.5
+
+                                    :)TrySolve (engine, player, out bestMove 
+
+                                                                                              :
+
+                                   // engine
+                                                ) (    // player
+
+                                                                                              :
+
+                     )  (     // bestMove
+                          false ,    true //   
+
+                                                                              bestMove  -1
+                                      12-      
+
+                                       //
+                             : )engine.IsGameOver == true  12 >  ( 
+
+                                                                                     false 
+
+                         Dictionary<string, int>       memo
+                                                                              nodeCount  0
+
+                                             )(engine.GetValidMoves   
+                                                                        
+
+                                                      :     
+
+                                                             )(engine.Clone   
+                                                             )(ApplyMove. 
+                             )CurrentPlayer == player. (  IsAgentTurn
+       player, IsAgentTurn, memo, , (SolveRecursive   
+
+                                                                                   )nodeCount
+    ,    ­     //
+
+                                                                                         Beam-
+                                                             : )nodeCount > 250000( 
+
+                                                                                      false 
+
+                                                            : )  >  ( 
+
+                                                                        
+                                                                              bestMove
+                                                                                          true 
+                                                                                         
+
+                                     ­      14.6
+                                           EndgameSolver.SolveRecursive
+
+      :)SolveRecursive (engine, player, isAgentTurn, memo, nodeCount 
+
+                                                                                                  :
+
+                                                          // engine
+                                                   ) (    // player
+                                           // isAgentTurn
+                                               )  (   // memo
+                       ) (      // nodeCount
+
+                                                                                                 :
+                                                       
+
+                                                               nodeCount  nodeCount + 1
+                                                                : )nodeCount > 250000( 
+
+                                                                                               0 
+
+                                                       : )engine.IsGameOver == true( 
+
+                                                                        )(engine.FinalizeBoard
+ ))player( (engine.GetScore(player) - engine.GetScore   
+
+                     //   
+
+                                            )BuildKey(engine, isAgentTurn   
+                                                          : )memo    ( 
+
+              )O(1     // ] [memo 
+
+                                                                                   0   
+                                                                  : )isAgentTurn == true( 
+
+                 ­ )MAX(     //
+                                                                            
+
+                                                         )(engine.GetValidMoves  
+                                                                  :    
+
+                                                                        )(engine.Clone  
+                                                                        )(ApplyMove.
+                                          )CurrentPlayer == player.(    
+          memo, ,   ,player ,(SolveRecursive , (Max   
+                                                                                              ))nodeCount
+
+                                                                                     
+                                                                                                       :
+
+                            ­     //
+                      )BeamSearch.SimulateGreedyOpponentMove(engine   
+
+                                                                                )(engine.Clone  
+                                                                               : )1-   ( 
+                                                                          ) (ApplyMove.
+                                                 )CurrentPlayer == player.(    
+          )memo, nodeCount ,   ,player ,(SolveRecursive   
+
+          DAG-      //    ] [memo
+                                                                                            
+                                                                                                
+                                                                                                             
+
+                                                                                  :  
+
+             PhaseAutomaton.Detect,       
+             Heuristic.Evaluate, SimulateGreedyOpponentMove
+( 17   -      TrySolve
+
+                                                           .) 17.9- 17.3 ,17.5 ,17.4
+    Push, Pop,(     MinHeap     
+
+             .17.6  12.2     )BubbleUp, BubbleDown
+ FindBestMove       :   
+O(\text{totalBudget} \cdot \log(\text{totalBudget}) +     
+Easy    0-  }}N_{\text{endgame  ,)}}N_{\text{endgame
+
+        .Hard       250,000    Medium-
+            ,    
+
+                .      ,    
+
+                                                .15
+
+                                                 )SetupWindow(   15.1
+
+                ,    
+                                                                                                     :
+                                                                                                         
+
+        (             
+                                                                                            .)
+
+     .          Start   
+
+                                            )MainWindow(    15.2
+
+        :            
+                                                                                                         
+
+             :Setup  
+ .     ,        
+
+               .        :New Game  
+
+                                                   )Data Binding(   15.3
+
+      Data Binding         
+            Setup-  .SetupViewModel-
+
+                ,   )Code-Behind( 
+                                       .Model-     UI-   
+
+                       )UML Class Diagram(   .16
+
+        .   , ,     
+.  )draw.io (    UML-     
+
+                                                             Core-   16.1
+                                                             / 
+
+Player1, Player2 enum                                       Player
+
+Easy, Medium, Hard enum                                     Difficulty
+
+Opening, Midgame, Endgame, StarvationMode, enum             GamePhase
+                                             CaptureChain
+
+LastPitIndex, ExtraTurn, CaptureOccurred, record            MoveResult
+    CapturedFromPit, CapturedStoneCount
+
+                Board, CurrentPlayer; ApplyMove(),  class   GameEngine
+IsValidMove(), GetValidMoves(), IsGameOver(),
+
+             )(FinalizeBoard(), GetWinner(), Clone
+
+)(CalculateMove(), ExecuteMove class                        GreedyAgent
+
+)(FindBestMove                                      static  BeamSearch
+                                                    class
+
+)(Evaluate                                          static  Heuristic
+                                                    class
+
+)(Detect                                            static  PhaseAutomaton
+                                                    class
+
+Push(), Pop(), Peek(), Count                        class   MinHeap<TItem,
+                                                    )(               >TPriority
+State, RootMove, Depth, H, Phase, Children class   SearchNode
+
+                                            WPF-   16.2
+
+                                                   
+
+ ;INotifyPropertyChanged  abstract                 ObservableObject
+
+)(OnPropertyChanged(), SetField             class
+
+Execute(),  ;ICommand                       class  RelayCommand
+                             )(CanExecute
+
+;    ICommand                               class  RelayCommand
+                  )(Execute(), CanExecute   )(
+
+           Pit0­Pit12, Store1/2),(          class  GameViewModel
+PlayPitCommand, : ,StatusMessage
+
+                            NewGameCommand
+
+           IsEasy,( -                       class  SetupViewModel
+SelectedDifficulty  ,)IsMedium, IsHard
+
+.                                           class          MainWindow,
+                                                   SetupWindow, App
+
+ ) (     16.3
+
+                                              :)(   
+    GameEngine     GameViewModel 
+                                                                            .GreedyAgent
+
+               RelayCommand     GameViewModel 
+                                                                .>RelayCommand<int-
+
+                    GreedyAgent 
+                                                                             .BeamSearch
+
+           MinHeap, :   BeamSearch   
+.GameEngine-   SearchNode, PhaseAutomaton, Heuristic
+
+       GameEngine    SearchNode  
+                                                                             .GamePhase
+
+     SearchNode  :)(    
+     .     ,)SearchNode (Children  
+
+   GamePhase     PhaseAutomaton 
+                                                                          .GameEngine-
+
+                 GameEngine-   Heuristic   
+                                                        .Player-  GamePhase-
+
+     MoveResult       GameEngine 
+                                                                         .Player 
+
+                                                                     :   
+            SetupWindow    App   
+
+                                                                     .SetupViewModel-
+   MainWindow    App ,    
+
+                                                                    .GameViewModel-
+
+        .17
+
+  Core-             
+              .)   (
+
+    .      , ,
+                              .-      , 
+
+                                         )GameEngine(    17.1
+
+   ,            
+    .    ,   ,)Kalah ( 
+                                                     .)UI(      
+
+        
+ )O(s                     MoveResult pitIndex: int  ApplyMove
+       s         
+                , 
+              ,
+             , 
+              
+            . 
+
+)O(1                      bool pitIndex: int        IsValidMove
+              
+              
+
+                 ( 
+                 
+                 
+
+                     .) 
+
+      )O(1                >List<int  -- GetValidMoves
+6- (           
+             
+    )
+                
+                 
+
+                      .
+
+)O(1                      bool       --             IsGameOver
+
+(            
+
+12- ( 
+
+)   
+
+             
+
+            
+
+            .)
+
+)O(1                      void       --             FinalizeBoard
+
+(  
+
+12-  
+
+)   
+
+            
+
+            
+        
+               .
+
+)O(1                   int  --  GetWinner
+         
+
+           
+        FinalizeBoard
+       1 :(
+      0 ,2  1- ,1
+
+                  .)
+
+)O(1    GameEngine          --  Clone
+
+(  
+
+14- )Deep Copy(
+
+)   
+
+       
+
+       ,
+
+      
+
+      .
+
+)O(1                   int      GetScore /
+        
+         ,                      GetPitIndex /
+         
+                                GetOppositePitIn
+             
+                                dex
+
+                 .
+
+                                                                                               
+
+                                         :ApplyMove   -
+
+                                                                                            :
+         )2   7-12 ,1   0-5(   // move
+
+                                                                                            :
+                            MoveResult  // result
+                                                                                      : 
+                                                                   ]Board[move   
+
+                                                                                Board[move]  0
+                                                                                  move   
+                                                                : )0 >  (  
+
+                                                             14  )1 +  (   
+                                                         : )     ( 
+
+                                                  //   
+                                                      1 + ] [Board  ] [Board
+                                                                 1 -     
+
+                                )    (     //
+                                         )      (   
+                                                                         false   
+                                                                                 0   
+
+       )    ,      (    //
+       : )1 == ] [Board         ( 
+
+                                                                            - 12   
+                                                                     : )0 > ] [Board( 
+
+                                                          1 + ] [Board   
+  + ]   [Board  ]   [Board
+
+                                                                              0  ] [Board
+                                                                               0  ] [Board
+                                                                          true   
+                                                                       : )false ==  ( 
+
+                                              )CurrentPlayer(   CurrentPlayer
+
+                )  ,  ,  , (MoveResult 
+                                                                                         
+
+                                           :FinalizeBoard   -
+
+                                                                                      : 
+
+                                                                 : )IsGameOver == true( 
+
+                                                               : 1     
+             ][Board + ]1  [Board  ]1  [Board
+                                                                  0  ][Board
+
+                                             : 2     
+             ][Board + ]2  [Board  ]2  [Board
+
+                                                                  0  ][Board
+                                                                       
+
+                            )GreedyAgent(    17.2
+
+        API-   )  ( Facade-    
+         .ViewModel-    
+     )   (     
+
+                                                                             .BeamSearch 
+
+                                                       
+
+)O(1          ;             -- player: Player,         GreedyAgent
+                                          difficulty:
+                                          Difficulty
+              
+                  
+
+             .  
+
+                            int       engine:          CalculateMove
+)17.3  (         
+                                      GameEngine
+                 
+               , 
+                 
+
+             .  
+
+ ( )O(s                     MoveR             engine:  ExecuteMove
+)ApplyMove-                    esult  GameEngine,
+
+                                            move: int
+                   
+
+                         .
+ )CalculateMove(      : 
+   ;    )ExecuteMove( 
+
+    ,   )   (     
+                                               .      
+
+                                          )BeamSearch(    17.3
+
+        ,internal static class BeamSearch    
+ .          
+
+     ,    ,)Stateless( -  
+         ,        
+                                                                    .     
+
+                                                :BeamSearch    
+
+ (                                            
+                    
+   )
+
+                    int  engine:              FindBestMove
+
+   .                     GameEngine,
+
+  ,                      difficulty:
+
+                         Difficulty, player:
+
+    --                   Player
+
+)O(1(  , 
+
+     
+
+)    ,
+
+     
+
+   .Capture Guard-
+O(N \cdot                           void    root:              RunBeam
+    )\log N      
+   N            Best-First Beam-            SearchNode,
+
+                   Search                   budget: int, K:
+               ,  
+             MinHeap-                       int, horizon: int
+              . 
+
+      )O(N                          double           node:     Backup
+   N               ,                        SearchNode
+  
+                  
+                )(
+   
+                   
+                 
+
+                           . 
+
+      )O(1                          int     engine: SimulateGreedy
+6- (            
+                                            GameEngine OpponentMove
+    
+                (   
+  )            )  
+
+                     
+                                 .
+ )O(M^2              int  engine:          ApplyCaptureGu
+ M         .Hard                                             ard
+                          GameEngine,
+                
+             ,            rootChildren:
+           
+          --              List<SearchNod
+            
+                          e>, myPlayer:
+                 . 
+                          Player,
+
+                          searchMove: int
+
+                                      :FindBestMove   -
+
+                                             :)FindBestMove (engine, difficulty, player
+
+                                                                                              :
+
+                                                       // engine
+                             )Easy / Medium / Hard(    // difficulty
+
+                                    )Player1 / Player2(    // player
+
+                                                                                              :
+                                               // bestMove
+
+                 )Hard- (   ­     :1  //
+       : )TotalStonesInPits(engine) < 12  difficulty == Difficulty.Hard( 
+
+                                                                              1-   
+  : )true == )  EndgameSolver.TrySolve(engine, player, out( 
+
+                  Beam-   ,    //   
+
+)plies 2/3/4 (        :2  //
+                   )horizon, totalBudget, K)  GetSearchParameters(difficulty(
+
+                    -        :3  //
+                                                )(engine.GetValidMoves   
+
+                       ) (totalBudget / Length     budget
+                                                            rootChildren
+
+                                                        :    move 
+                                                                  )(childEngine  engine.Clone
+                                                                 )childEngine.ApplyMove(move
+                                 )phase  PhaseAutomaton.Detect(childEngine, player
+                                      )h  Heuristic.Evaluate(childEngine, player, phase
+           )node  SearchNode(childEngine, rootMove: move, depth: 1, h, phase
+                            )K, horizon, player ,   RunBeam(node, budget
+                                                         )node.Value  Backup(node, player
+                                                          rootChildren   node  
+
+            Backup-         :4  //
+                         )bestNode  Argmax(rootChildren, key: node  node.Value
+                                                         chosenMove  bestNode.RootMove
+
+                         )Hard- (   ­     :5  //
+                                                            : )difficulty == Difficulty.Hard( 
+
+)chosenMove  ApplyCaptureGuard(engine, rootChildren, player, chosenMove
+
+                                                                                  chosenMove 
+                                                                                            
+
+                                   : ApplyCaptureGuard   -
+
+        :)ApplyCaptureGuard (engine, rootChildren, agentPlayer, candidateMove
+
+                                                                                                    :
+
+                                          // engine
+                                        // rootChildren
+
+                                                                // agentPlayer
+                     Beam-        // candidateMove
+
+                                                                                                    :
+                )    (     // safeMove
+
+                                                                                                 :
+
+     3   // FREE_CAPTURE_THRESHOLD  3
+                                                                                             
+
+                        :1  //
+                                                              )(afterCandidate  engine.Clone
+
+                            )afterCandidate.ApplyMove(candidateMove   
+                 candidateMove         myCapture
+                                                                                    opponentReply  0
+                                                                                       0    
+
+                        : ))agentPlayer(  == afterCandidate.CurrentPlayer( 
+
+                      )opponentReply  SimulateGreedyOpponentMove(afterCandidate
+                                                              )(afterReply  afterCandidate.Clone
+
+                                          )afterReply.ApplyMove(opponentReply   
+                                               CapturedStoneCount.     
+
+                                           :2  //
+myCapture(  )FREE_CAPTURE_THRESHOLD =>   (   
+
+                                                                                         )   <
+                                                                         : )false ==  ( 
+
+                     ,       // candidateMove 
+
+                      )Override(    :3  //
+                                                                                      safestMove  null
+
+                                                                                   minExposure
+                                                                   : rootChildren  child 
+
+                                                      : )child.RootMove == candidateMove( 
+
+                                                    //   
+
+                                                                             )(afterAlt  engine.Clone
+                                   )afterAlt.ApplyMove(child.RootMove   
+
+                                                        myAltGain
+                                                                                        oppAltReply  0
+
+                                                                                     0   exposure
+                                  : ))agentPlayer(  == afterAlt.CurrentPlayer( 
+
+                                    )oppAltReply  SimulateGreedyOpponentMove(afterAlt
+                                                                     )(afterAltReply  afterAlt.Clone
+
+                                           )altResult  afterAltReply.ApplyMove(oppAltReply
+                                              altResult.CapturedStoneCount   exposure
+
+                                                    myAltGain -  exposure    
+                                                             : )minExposure <   ( 
+
+                                                                          minExposure
+                                                                      safestMove  child.RootMove
+
+                                             :4  //
+: ))myCapture -   ( < minExposure  safestMove  null( 
+
+                                                                            safestMove 
+                                                                           :  
+   ,      // candidateMove 
+
+                                                                                    
+
+                                              :Backup   -
+
+                                                            :)Backup (node, agentPlayer
+
+                                                                                             :
+
+                                                                // node
+                                                        // agentPlayer
+
+                                                                                                
+                                                                                             :
+                                                         // value
+
+         )      (    :  //
+                                                         : )  node.Children( 
+
+                                            : )node.State.IsGameOver == true( 
+
+                                            //
+       (scoreDiff  node.State.Store(agentPlayer) - node.State.Store
+
+                                                                         ))agentPlayer(
+                                                                    scoreDiff * 10000 
+
+                                                                                          :
+                                  // node.H 
+
+                          :  //
+                                                                   childValues
+
+                                                   : node.Children  child 
+
+                      childValues   )Backup(child, agentPlayer  
+
+                                            : )node.NextPlayer == agentPlayer( 
+
+                    ­ )MAX(     //
+                                                                    )Max(childValues 
+                                                                                          :
+
+                         ­     //
+                                                                                    ]childValues[0 
+                                                                                                
+
+                                                                           :  
+
+      :         
+  ,     ,)plies 4  ,3 ,2(     
+
+                                                                         .)K(    
+
+            ,   
+            ,)DateTime(  
+      .        
+
+                                                                                             . 7 
+
+                                        )Heuristic(    17.4
+
+ .             
+           
+
+                                                                          .   
+
+                                                 
+
+ ( )O(1                   double        engine,  Evaluate
+   36-     ;                      perspective,
+) 
+                                          phase
+               
+                       .
+
+                                                        :Evaluate   -
+
+                                                                                                        :
+
+                                                                  // engine
+                                           // perspective
+ )' / Opening / Midgame / Endgame(        // phase
+
+                                                                                                       :
+                                                         // score
+                                                                                            : 
+
+                                                             : )engine.IsGameOver == true( 
+
+                                                                               )(engine.FinalizeBoard
+perspective))) *( (engine.GetScore(perspective) - engine.GetScore( 
+
+                                                                                                     10000
+
+                                           phase       )w1, w2, w3(
+    ))perspective( (engine.Store(perspective) - engine.Store  
+
+                            
+                                            
+
+                      )0.5 *  ( + )2.0 *  (    
+                                      perspective        
+                                                                                       0   
+                                                 : )phase == GamePhase.CaptureChain( 
+
+                                             1.5 *       
+
+                                                                                            0   
+                                                                 : )3     ( 
+
+                                                         3.0 *       
+
+    + )  * w3( + )   * w2( + ) * score  (w1
+                                                                                        - 
+                                                                                               score 
+                                                                                                
+
+                          )PhaseAutomaton(     17.5
+
+         .)FSA(      
+   ,      .    
+
+                                                                            .    
+
+                             
+
+( )O(1           GamePhase       engine, Detect
+14                          perspective
+
+        )
+   
+                     .
+
+                                       :Detect   -
+
+                                                                                   :
+
+                                            // engine
+                                   // perspective
+
+                                                                                  :
+
+                                GamePhase  enum-   // phase
+                                                                      : 
+
+                                        )perspective(    
+                               )Starvation(    :1   //
+
+                                 : )3       ( 
+
+                                          GamePhase.StarvationMode 
+
+             )CaptureChain(     :2   //
+      : )2          ( 
+
+                                             GamePhase.CaptureChain 
+
+                                    )Endgame(    :3   //
+                            : )12 <   12-   ( 
+
+                                                  GamePhase.Endgame 
+
+                              )Midgame(    :4   //
+ : )36- 12      12-   ( 
+
+                                                   GamePhase.Midgame 
+
+                                   )Opening(   :   //
+                                                    GamePhase.Opening 
+                                                                         
+
+                      )MinHeap(     17.6
+     )Min-Heap(       
+        ""     .
+
+                                                                           .   
+
+                                                  
+
+)O(log n                                  void   item: TItem, Push
+                 
+                                                 priority: TPriority
+            )BubbleUp(
+                                   .
+
+)O(log n                                  TItem  --                   Pop
+           ,  
+
+                               
+                           .)BubbleDown(
+
+)O(1                                      TItem  -- Peek
+                 
+                              . 
+
+)O(1                                      int    -- Count
+
+          .   
+
+         BubbleDown- BubbleUp   : 
+break       )Tail-recursion( -
+
+            ,continue  
+                                                                  .  
+
+                                              :Pop- Push   -
+
+                                                                             :)Push (item, priority
+
+                                                                                                   :
+
+                                   )SearchNode (     // item
+                         )   (     // priority
+                                                                                       : 
+                                           priority- item       
+                                    )List(         
+
+                                                      1 -      
+                                                )Bubble Up(      //
+
+                                                                 : )0 >  (  
+
+                                                              2 / )1 -  (   
+                  : )Priority.] [ => Priority.] [( 
+
+                                  ,   //   
+                                              
+                                                                            
+                                                                                           
+
+                                                                                                :)( Pop
+
+                                                                                                   :
+
+                                   // item
+                                                                                       : 
+
+                                                              : )   ( 
+
+                                                      )InvalidOperationException(  
+                                                                                                       
+
+                                                                  Item.]0[   
+                                                        1 -      
+
+                                                              ] [  ]0[
+                                                            
+
+                                                                
+                                              )Bubble Down(      //
+
+                                                                                    0   
+                                                                                : )true(  
+
+                                                         1 + )  * 2(   
+                                                            2 + )  * 2(   
+                                                                       
+
+[ < Priority.] [    <  ( 
+                                                                                : )Priority.]
+
+                                                                      
+   [ < Priority.] [    <  ( 
+                                                                             : )Priority.]
+
+                                                                      
+
+                                                     : )  ==  ( 
+
+                                           //   
+
+                                       
+                                                                    
+
+                                                                                  
+                                                                                        
+
+ )   ( SearchNode  :)SearchNode(  
+  IComparable     .12.3    
+
+          .  h      
+                        .    )Beam Pruning(     
+
+                                 )GameViewModel(    17.7
+
+     .     ViewModel-     
+   -   MVVM      
+
+   WPF       .)GreedyAgent- Model (GameEngine-
+     Data-     )XAML(      ; 
+
+                   INotifyPropertyChanged    , Binding
+   ,   ,      .ObservableObject
+
+                                                                       .   
+
+                               :GameViewModel     
+
+            / 
+ 
+   ) ( 
+)O(1         .              --      difficulty:    )( GameViewModel
+            
+                                    Difficulty,
+            Commands-
+           ,                        computerStart
+            
+          ,                         s: bool
+           
+           
+
+                     .
+
+)O(1      14                int     -- Pit0­Pit11, Store1, Store2
+
+          
+
+          ,
+
+           
+
+          
+
+           
+
+           .
+
+           
+
+         
+
+         OnPropertyChan
+
+          ged
+
+         .
+
+)O(1                        string  --             StatusMessage
+           
+
+            
+             
+             
+         , ( 
+            
+
+                        .)
+
+   )O(s                     -- pitIndex: int       PlayPitCommand
+                  
+
+            
+                .
+
+            ,
+         ,  
+
+             
+            
+          
+
+                    .
+
+                          Task  -- MaybeRunComputerTurnA
+                                                                   sync
+            
+        )Task.Run( 
+      
+            Thread  
+         . Pool
+
+             
+          
+
+                   .AI- 
+
+)O(1                      --    --             NewGameCommand
+
+         
+
+        ( 
+
+         
+
+         ,)
+
+          
+
+          
+
+          
+
+        .
+
+)O(1                      void  difficulty:    Reconfigure
+             
+         Code-Behind-           Difficulty,
+           Wpf-  
+                                computerStart
+         ;Setup-
+                                s: bool
+              
+          
+
+                 . 
+O(1) (14                   void  e:           OnBoardChanged
+               . 
+  )                              BoardChange
+                14 
+                                 dEventArgs
+
+                         
+           StatusMessag-
+
+                 e
+                        
+
+                   .
+
+                                   :StartNewGame    -
+
+                                                                                   :)( StartNewGame
+
+                                                                                         : 
+
+                                                    : )  cancellationTokenSource( 
+
+                                              )cancellationTokenSource.Cancel(  
+
+                      CancellationTokenSource   cancellationTokenSource
+                                                                             : )  engine( 
+
+                                                      engine.BoardChanged   
+
+                             computerStarts == true) ? Player2 : Player1(   
+                                               ) ( GameEngine   engine
+
+          )OnBoardChanged   ( engine.BoardChanged  
+                                      )Player2, difficulty( GreedyAgent   agent
+                                                    : )engine.CurrentPlayer == Player1( 
+
+                                      ".StatusMessage  "Your turn! Choose a pit to sow
+                                                                                                         
+
+                                                                                                   :
+                                       "...StatusMessage  "Computer's turn. Calculating
+                           )(MaybeRunComputerTurnAsync    
+
+                     )OnPropertyChanged(        
+                                                                                             
+                    :MaybeRunComputerTurnAsync   -
+
+                                                             :)( MaybeRunComputerTurnAsync
+
+                                                                                                      :
+
+                                                    // Task
+                                                                                          : 
+
+           : )engine.CurrentPlayer == Player1  engine.IsGameOver == true( 
+
+                                                                                            
+
+                                             cancellationTokenSource.Token   
+                                                                                                      :
+
+                                                                      IsComputerThinking  true
+            // )RaiseCanExecuteChanged(   
+
+                 )Chaining(         //
+: )engine.CurrentPlayer == Player2  engine.IsGameOver == false(  
+
+                                                 "...StatusMessage  "Computer is thinking
+                         600  )Task.Delay(  
+                    )ThrowIfCancellationRequested(      
+                      Thread Pool-  Thread       //
+               )agent.CalculateMove(engine  )Task.Run(     
+
+                                                                     
+                   // ) (engine.ApplyMove
+
+                                                                                   OnBoardChanged
+
+                                           :)OperationCanceledException(   
+
+                           )    (    
+                                                                                                   :
+
+                                                                     IsComputerThinking  false
+               // )RaiseCanExecuteChanged(   
+
+                                                                                             
+
+                       )SetupViewModel(     17.8
+
+                         
+        ,ObservableObject     .)SetupWindow(
+            
+  .       ,) (    
+
+                             :SetupViewModel     
+
+      (                                                 / 
+                        )
+
+)O(1                                   bool        --  IsEasy /
+
+                                                       IsMedium /
+
+       )TwoWay( -                                      IsHard
+
+      .    
+
+         
+
+        
+
+      .SelectedDifficulty-
+
+)O(1                                   bool        -- PlayerStarts /
+                                                         ComputerStarts
+        
+
+         -
+
+      .   
+
+         
+
+      .   
+
+)O(1                                   Difficulty  -- SelectedDifficult
+           .)Get(                                                              y
+
+              
+                   
+
+         enum-
+                               .Core-
+
+)O(1                                   --          -- StartCommand
+
+        .Start  
+
+       DialogResult = true 
+
+         
+
+      .  
+)O(1                   --  -- CancelComman
+
+            Cancel           d
+
+             . 
+
+              false
+
+           .    
+
+                           :StartCommand.Execute   -
+
+                                                                                                    
+                                                                                               :
+
+                                                                                                    
+                  SetupWindow-    // window
+
+                                                                                                    
+                                                                                   : 
+                                                                      : )  window( 
+
+                                                                                                    
+                         // window.DialogResult  true
+                   // )(window.Close
+
+                                                                                        
+
+                                  )EndgameSolver(     17.9
+
+       ,internal static class EndgameSolver    
+               .      ,
+
+        ,     
+        ) 12-     12-    ( 
+                            .          
+
+                                                          :EndgameSolver    
+
+                             
+           ) ( 
+S  )O(S                           bool    engine:               TrySolve
+                   
+                 .                        GameEngine,
+ 
+   250,000-                               player: Player, out
+                  ,Memoization-
+                                          bestMove: int
+                        
+                
+
+                   . 
+               true 
+               
+
+                    . 
+
+   )O(S                           int     engine: SolveRecursive
+               
+                                          GameEngine,
+Memoizatio-        
+        n      .                          player: Player,
+
+                                          isAgentTurn: bool,
+                  ,  
+                                          memo:
+                 
+                .                         Dictionary<string,
+
+                                          int>, ref
+
+                                          nodeCount: int
+
+( )O(1                            string               engine:  BuildKey
+ 14-                                           GameEngine,
+                 14                       isAgentTurn: bool
+    )
+                     
+                
+
+                , 
+                     
+                             .
+
+                                 :TrySolve   -
+
+                              :)TrySolve (engine, player, out bestMove
+                                                                               :
+
+                     // engine
+                                ) (    // player
+                                                                                                           :
+                                  )  (     // bestMove
+                                   false ,     true //   
+
+                                                                                            bestMove  -1
+                                                   12-      
+
+                                                     //
+                                          : )engine.IsGameOver == true  12 >  ( 
+
+                                                                                                   false 
+
+                               >Dictionary<string, int       memoTable
+                                                                                            nodeCount  0
+
+                                                           )(engine.GetValidMoves   
+                                                                                     
+
+                                                                   :     
+
+                                                                          )(engine.Clone   
+                                                                           )(ApplyMove. 
+                                           )CurrentPlayer == player. (  IsAgentTurn
+             player, IsAgentTurn, memoTable, , (SolveRecursive   
+
+                                                                                                 )nodeCount
+
+          Beam-     ,    --    //
+                                                                          : )nodeCount > 250000( 
+
+                                                                                                   false 
+
+                                                                         : )  >  ( 
+
+                                                                                      
+                                                                                          bestMove
+
+                                                                                                    true 
+                                                                                                   
+
+                                                                :   
+
+   ,           
+ ,  .        )min(   
+         Beam-      
+            .SimulateGreedyOpponentMove  
+                                       . 13        
+
+                  
+          ,    
+
+             .   
+    Capture Guard- Beam-     , 
+
+     .             ,
+
+                                                       .18
+
+          ,        -    
+       .WPF-        ,App.OnStartup 
+    ,    ,    :    
+
+                       :   -  .     
+
+                                                                                       :)(OnStartup 
+
+                                                                                                : 
+
+                                         SetupWindow        setup
+                      DataContext-   SetupViewModel   setupVM
+
+                                                            : )ShowDialog() == true. setup( 
+
+                                                           setupVM.SelectedDifficulty   
+                                                        setupVM.ComputerStarts   
+          )  , (MainWindow        main
+                                                    Application.Current.MainWindow  main
+
+                                                                                          Show(). main
+          ShutdownMode.OnLastWindowClose Application.Current.ShutdownMode
+
+                                                                                                               
+                                                                                                        :
+            ,     // )(Application.Current.Shutdown
+                                                                                                   
+
+                                                                :)Race Conditions(   
+
+     WPF    .     ShutdownMode- 
+     Setup-       .     
+   WPF ,          MainWindow-  
+                        .         
+
+      OnLastWindowClose-  ,  OnExplicitShutdown-
+                 
+                                                                                                       .
+
+                                                 :19 
+
+              ,   ,  
+                                                                                  .   
+
+                                                                         19.1
+
+  ,    .)Windows(  WPF   
+          ,      .) (  
+                       .     ,     .
+
+                     )SetupWindow(      19.2
+
+             :          , 
+
+          :)Difficulty(   
+                                                                               :  
+
+    -   plies 2     :Easy 
+                                                                      . 
+
+                                 . plies 3     :Medium 
+  plies 4     .   :Hard 
+
+       )Capture Guard(  -  
+                                                                                       .
+
+        -  :)Who plays first(    
+                                                                                     : 
+
+          .      ) ( :I play first 
+               :Computer plays first 
+
+                                                                                    .
+
+                 Start   
+                               .    Cancel      .
+
+                                            )MainWindow(    19.3
+                                    :   14-  ,     
+
+     6  1-    ,)1 (    :  
+                                                                                      .) (
+
+                                            .)2 (    :  
+       ,       :)(  
+
+                 .   
+       .      ,
+
+                                                                     .    
+
+                                                                    )(   19.4
+
+                   :   
+    (       .  -
+       .       ) 
+
+                            .     ,   
+ Computer..." :    ,    :  
+
+       (        ."is thinking
+        ,   .  ,    ,)
+                                                                 .   
+
+                                                                          19.5
+
+ :              
+            ,       ,  
+
+  .            .
+
+                                                                19.6
+
+                                                      :      
+
+  4(          :New Game 
+                                              .       )
+
+     .          :Setup 
+    .           
+
+          ,   Cancel   
+                                                                        .    
+
+                                                                            19.7
+
+   ,  .          
+   .            
+
+        ,  :    )MessageBox(  
+       New(      ,   .    ,
+                                                                       .)Setup(    )Game
+                   ) - Console(      19.8
+
+   .)MancalaProject.Console(      ,  
+   ,AI-           
+
+         ,       .
+              .)1-6(          ,1-3  
+

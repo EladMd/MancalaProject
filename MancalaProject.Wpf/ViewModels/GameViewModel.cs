@@ -227,10 +227,10 @@ namespace MancalaProject.Wpf.ViewModels
 
             // Detach from the previous engine, if any, so its events don't leak into the new game.
             if (_engine != null)
-                _engine.BoardChanged -= OnEngineBoardChanged;
+                _engine.BoardChanged -= OnBoardChanged;
 
             _engine = new GameEngine(_computerStarts ? Player.Player2 : Player.Player1);
-            _engine.BoardChanged += OnEngineBoardChanged;
+            _engine.BoardChanged += OnBoardChanged;
             _agent = new GreedyAgent(Player.Player2, _difficulty);
 
             IsComputerThinking = false;
@@ -298,7 +298,7 @@ namespace MancalaProject.Wpf.ViewModels
                 {
                     IsComputerThinking = true;
                     StatusMessage = isExtraTurnFollowup
-                        ? "Computer got an extra turn — thinking again..."
+                        ? "Computer got an extra turn – thinking again..."
                         : "Computer is thinking...";
 
                     await Task.Delay(ComputerMoveDelayMs, ct);
@@ -402,9 +402,9 @@ namespace MancalaProject.Wpf.ViewModels
             int winner = _engine.GetWinner();
             return winner switch
             {
-                0 => "Game over — Player 1 wins!",
-                1 => "Game over — Computer wins!",
-                _ => "Game over — it's a tie."
+                0 => "Game over – Player 1 wins!",
+                1 => "Game over – Computer wins!",
+                _ => "Game over – it's a tie."
             };
         }
 
@@ -412,7 +412,7 @@ namespace MancalaProject.Wpf.ViewModels
         //  Engine event plumbing
         // ============================================================
 
-        private void OnEngineBoardChanged() =>
+        private void OnBoardChanged() =>
             RaiseAllBoardProperties();
 
         /// <summary>
